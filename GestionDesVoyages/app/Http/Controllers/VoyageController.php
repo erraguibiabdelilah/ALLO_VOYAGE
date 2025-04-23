@@ -8,7 +8,13 @@ class VoyageController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     *
+     *
      */
+
+
+    
     public function index()
     {
         //
@@ -35,7 +41,7 @@ class VoyageController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**

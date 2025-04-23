@@ -1,0 +1,262 @@
+<!-- resources/views/layouts/app.blade.php -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allo Voyage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Styles personnalisés */
+        body {
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            height: 100vh;
+            position: fixed;
+            width: 200px;
+            border-right: 1px solid #dee2e6;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            left: 0;
+            top: 60px; /* Hauteur de la navbar */
+        }
+
+        .sidebar.collapsed {
+            width: 70px;
+        }
+
+        .sidebar-item {
+            padding: 10px;
+            text-align: left;
+            color: #6c757d;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .sidebar-item:hover, .sidebar-item.active {
+            background-color: #e9ecef;
+            color: #0d6efd;
+        }
+
+        .sidebar-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-text {
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .sidebar.collapsed .sidebar-text {
+            opacity: 0;
+            visibility: hidden;
+            width: 0;
+        }
+
+        .main-content {
+            margin-left: 200px;
+            padding: 20px;
+            background-color: #e6f2f8;
+            min-height: 100vh;
+            transition: margin-left 0.3s ease;
+            margin-top: 60px; /* Hauteur de la navbar */
+        }
+
+        .main-content.expanded {
+            margin-left: 70px;
+        }
+
+        .navbar {
+            background-color: white;
+            border-bottom: 1px solid #dee2e6;
+            padding: 0.5rem 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1030;
+            left: 0;
+            top: 0;
+            height: 60px;
+        }
+
+        /* Disposition fixe pour la navbar */
+        .navbar-container {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Logo fixe, non affecté par la sidebar */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            padding-right: 20px;
+            flex-shrink: 0;  /* Empêche le conteneur de se rétrécir */
+        }
+
+        /* Zone du contenu principal de la navbar */
+        .navbar-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        .logo {
+            height: 35px;
+        }
+
+        .profile-icon {
+            width: 35px;
+            height: 35px;
+            background-color: #6c757d;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-badge {
+            position: relative;
+        }
+
+        .badge-number {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .active-sidebar {
+            background-color: #0d6efd;
+            color: white !important;
+        }
+
+        .toggle-sidebar {
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-sidebar:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 767.98px) {
+            .navbar-brand .text-primary {
+                font-size: 0.9rem;
+            }
+
+            .navbar-brand .text-muted {
+                font-size: 10px !important;
+            }
+
+            .profile-text {
+                display: none;
+            }
+
+            .logo {
+                height: 25px;
+            }
+
+            .sidebar {
+                width: 70px;
+                top: 50px;
+            }
+
+            .sidebar:not(.collapsed) {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 70px;
+                margin-top: 50px;
+            }
+
+            .sidebar:not(.collapsed) ~ .main-content {
+                margin-left: 200px;
+            }
+
+            .navbar {
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar (maintenant en premier, avant la sidebar) -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="navbar-container">
+            <!-- Logo toujours visible -->
+            <div class="logo-container">
+                <a class="navbar-brand" href="#">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="Allo Voyage" class="logo">
+                        <div class="ms-2">
+                            <span class="text-primary fw-bold">ALLO VOYAGE</span>
+                            <span class="text-muted d-block" style="font-size: 12px;">TRAVEL AGENCY</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Contenu de la navbar -->
+            <div class="navbar-content">
+                <div class="toggle-sidebar" id="toggleSidebar">
+                    <i class="bi bi-list"></i>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <div class="notification-badge me-2 me-lg-3">
+                        <i class="bi bi-chat-left-dots-fill fs-4 text-primary"></i>
+                        <span class="badge-number">2</span>
+                    </div>
+                    <div class="d-flex align-items-center me-2 me-lg-3">
+                        <div class="profile-icon bg-primary me-2">
+                            <i class="bi bi-person-fill text-white"></i>
+                        </div>
+                        <span class="profile-text">Bonjour <strong>Admin</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Contenu principal -->
+    <div class="main-content" id="mainContent">
+        @yield('content')
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

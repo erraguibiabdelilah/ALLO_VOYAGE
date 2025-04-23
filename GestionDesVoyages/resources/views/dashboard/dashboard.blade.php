@@ -1,5 +1,5 @@
 <!-- resources/views/clients/index.blade.php -->
-@extends('layout.index')
+@extends('layout.admin')
 
 @section('content')
 

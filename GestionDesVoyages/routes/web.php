@@ -3,10 +3,15 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('layout.index');
+    return view('layout.admin');
 });
 
-Route::get('/listClient', function () {
+Route::get('/user', function () {
+    return view('layout.user');
+});
+
+
+Route::get('/client', function () {
     return view('client.client');
 })->name('clients');
 
@@ -16,8 +21,6 @@ Route::put('/update/{id}', [ClientController::class, 'update'])->name('clients.u
 Route::get('/dashboard', function () {
     return view('dashboard.dashboard');
 })->name('dashboard');
-
-
 
 Route::get('/voyage.voyage', function () {
     return view('voyage.voyage');
