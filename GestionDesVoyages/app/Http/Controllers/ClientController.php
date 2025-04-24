@@ -51,7 +51,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
@@ -60,5 +60,10 @@ class ClientController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function profile()
+    {
+        return view('pages.profile');
     }
 }

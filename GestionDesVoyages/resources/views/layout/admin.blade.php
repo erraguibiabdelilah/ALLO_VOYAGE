@@ -27,7 +27,7 @@
         }
 
         .sidebar.collapsed {
-            width: 70px;
+            width: 50px;
         }
 
         .sidebar-item {
@@ -68,19 +68,19 @@
         .main-content {
             margin-left: 200px;
             padding: 20px;
-            background-color: #e6f2f8;
+            background-color: #f7f7f7;
             min-height: 100vh;
             transition: margin-left 0.3s ease;
             margin-top: 60px; /* Hauteur de la navbar */
         }
 
         .main-content.expanded {
-            margin-left: 70px;
+            margin-left: 50px;
         }
 
         .navbar {
             background-color: white;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid #ffffff;
             padding: 0.5rem 1rem;
             position: fixed;
             width: 100%;
@@ -88,6 +88,7 @@
             left: 0;
             top: 0;
             height: 60px;
+          
         }
 
         /* Disposition fixe pour la navbar */

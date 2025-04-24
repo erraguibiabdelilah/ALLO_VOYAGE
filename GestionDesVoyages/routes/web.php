@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 
 Route::get('/', function () {
     return view('layout.admin');
@@ -29,3 +30,7 @@ Route::get('/voyage.voyage', function () {
 Route::get('/reservations', function () {
     return view('reservation.reservation');
 })->name('reservations');
+
+
+Route::get('/profile',[ClientController::class, 'profile'])->name('profile');
+
