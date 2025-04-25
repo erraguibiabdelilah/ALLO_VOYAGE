@@ -261,7 +261,7 @@
                 <i class="bi bi-people sidebar-icon"></i>
                 <span class="sidebar-text">Liste des clients</span>
             </a>
-            <a href="{{ route('voyages') }}" class="sidebar-item">
+            <a href="{{ route('voyages.index') }}" class="sidebar-item">
                 <i class="bi bi-airplane sidebar-icon"></i>
                 <span class="sidebar-text">Gestion des voyages</span>
             </a>
