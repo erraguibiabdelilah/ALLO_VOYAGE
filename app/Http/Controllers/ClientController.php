@@ -11,7 +11,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return view('client.client');
     }
 
     /**
@@ -51,7 +51,7 @@ class ClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+
     }
 
     /**

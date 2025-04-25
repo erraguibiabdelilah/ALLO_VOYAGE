@@ -18,8 +18,9 @@
             background-color: #ffffff;
             height: 100vh;
             position: fixed;
+
             width: 200px;
-            border-right: 1px solid #dee2e6;
+            box-shadow: 0px 0 10px 10px rgba(255, 145, 1, 0.1);
             z-index: 1000;
             transition: all 0.3s ease;
             left: 0;
@@ -27,13 +28,14 @@
         }
 
         .sidebar.collapsed {
+
             width: 50px;
         }
 
         .sidebar-item {
             padding: 10px;
             text-align: left;
-            color: #6c757d;
+            color: #1d1d1d;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -44,7 +46,7 @@
         }
 
         .sidebar-item:hover, .sidebar-item.active {
-            background-color: #e9ecef;
+            background-color: #fcfcfc;
             color: #0d6efd;
         }
 
@@ -68,7 +70,7 @@
         .main-content {
             margin-left: 200px;
             padding: 20px;
-            background-color: #f7f7f7;
+            background-color: #ffffff;
             min-height: 100vh;
             transition: margin-left 0.3s ease;
             margin-top: 60px; /* Hauteur de la navbar */
@@ -80,7 +82,6 @@
 
         .navbar {
             background-color: white;
-            border-bottom: 1px solid #ffffff;
             padding: 0.5rem 1rem;
             position: fixed;
             width: 100%;
@@ -88,7 +89,7 @@
             left: 0;
             top: 0;
             height: 60px;
-          
+
         }
 
         /* Disposition fixe pour la navbar */
@@ -210,11 +211,14 @@
                 height: 50px;
             }
         }
+        .shadow-bottom {
+         box-shadow: 0 6px 6px -2px rgba(0, 117, 252, 0.1); /* Ombre uniquement vers le bas */
+            }
     </style>
 </head>
 <body>
     <!-- Navbar (maintenant en premier, avant la sidebar) -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-white shadow-bottom">
         <div class="navbar-container">
             <!-- Logo toujours visible -->
             <div class="logo-container">
@@ -222,7 +226,7 @@
                     <div class="d-flex align-items-center">
                         <img src="{{ asset('images/logo.jpg') }}" alt="Allo Voyage" class="logo">
                         <div class="ms-2">
-                            <span class="text-primary fw-bold">ALLO VOYAGE</span>
+                            <span class="text-primary fw-bold"style="font-size: 18px;">ALLO VOYAGE</span>
                             <span class="text-muted d-block" style="font-size: 12px;">TRAVEL AGENCY</span>
                         </div>
                     </div>
@@ -237,12 +241,12 @@
 
                 <div class="d-flex align-items-center">
                     <div class="notification-badge me-2 me-lg-3">
-                        <i class="bi bi-chat-left-dots-fill fs-4 text-primary"></i>
+                        <i class="bi bi-chat-left-dots fs-5 text-black"></i>
                         <span class="badge-number">2</span>
                     </div>
                     <div class="d-flex align-items-center me-2 me-lg-3">
-                        <div class="profile-icon bg-primary me-2">
-                            <i class="bi bi-person-fill text-white"></i>
+                        <div class="notification-badge me-2">
+                            <i class="bi bi-person fs-4 text-black"></i>
                         </div>
                         <span class="profile-text">Bonjour <strong>Admin</strong></span>
                     </div>
@@ -258,15 +262,15 @@
                 <i class="bi bi-house-door sidebar-icon"></i>
                 <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="{{ route('clients') }}" class="sidebar-item">
+            <a href="{{ route('clients.index') }}" class="sidebar-item">
                 <i class="bi bi-people sidebar-icon"></i>
                 <span class="sidebar-text">Liste des clients</span>
             </a>
-            <a href="{{ route('voyages') }}" class="sidebar-item">
+            <a href="" class="sidebar-item">
                 <i class="bi bi-airplane sidebar-icon"></i>
                 <span class="sidebar-text">Gestion des voyages</span>
             </a>
-            <a href="{{ route('reservations') }}" class="sidebar-item">
+            <a href="" class="sidebar-item">
                 <i class="bi bi-calendar-check sidebar-icon"></i>
                 <span class="sidebar-text">Liste des réservations</span>
             </a>

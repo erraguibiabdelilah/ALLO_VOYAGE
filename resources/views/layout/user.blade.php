@@ -25,7 +25,7 @@
 
         .main-content {
             padding: 20px;
-            background-color: #e6f2f8;
+            background-color: #ffffff;
             min-height: 100vh;
             transition: margin-left 0.3s ease;
             margin-top: 60px; /* Hauteur de la navbar */
@@ -37,7 +37,6 @@
 
         .navbar {
             background-color: white;
-            border-bottom: 1px solid #dee2e6;
             padding: 0.5rem 1rem;
             position: fixed;
             width: 100%;
@@ -130,7 +129,7 @@
         /* Styles pour les modals de notification et de messagerie */
         .notification-modal {
             position: absolute;
-            top: 120px;
+            top: 80px;
             right: 20px;
             width: 320px;
             background-color: white;
@@ -215,7 +214,7 @@
         /* Styles pour le modal de profil */
         .profile-modal {
             position: absolute;
-            top: 120px;
+            top: 80px;
             right: 20px;
             width: 200px;
             background-color: white;
@@ -298,19 +297,21 @@
                 width: 180px;
             }
         }
+        .shadow-bottom {
+         box-shadow: 0 6px 6px -2px rgba(0, 117, 252, 0.1); /* Ombre uniquement vers le bas */
+            }
     </style>
 </head>
 <body>
     <!-- Navbar (maintenant en premier, avant la sidebar) -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-withe shadow-bottom">
         <div class="navbar-container">
-            <!-- Logo toujours visible -->
             <div class="logo-container">
                 <a class="navbar-brand" href="#">
                     <div class="d-flex align-items-center">
                         <img src="{{ asset('images/logo.jpg') }}" alt="Allo Voyage" class="logo">
                         <div class="ms-2">
-                            <span class="text-primary fw-bold">ALLO VOYAGE</span>
+                            <span class="text-primary fw-bold"style="font-size: 18px;">ALLO VOYAGE</span>
                             <span class="text-muted d-block" style="font-size: 12px;">TRAVEL AGENCY</span>
                         </div>
                     </div>
@@ -319,23 +320,23 @@
 
             <!-- Contenu de la navbar -->
             <div class="navbar-content">
-                <div class="toggle-sidebar" id="toggleSidebar">
-                    <i class="bi bi-house fs-4 text-primary"></i>
+                <div  id="toggleSidebar">
+
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="notification-badge me-2 me-lg-3 mx-2" id="notificationBell">
-                        <i class="bi bi-bell fs-4 text-primary"></i>
+                        <i class="bi bi-bell fs-5 text-black"></i>
                         <span class="badge-number">2</span>
                     </div>
 
                     <div class="notification-badge me-2 me-lg-3 mx-2" id="messageBell">
-                        <i class="bi bi-chat-left-dots fs-4 text-primary"></i>
+                        <i class="bi bi-chat-left-dots fs-5 text-black "></i>
                         <span class="badge-number">2</span>
                     </div>
 
                     <div class="d-flex align-items-center me-2 me-lg-3 mx-2" id="profileSection">
                         <div class="notification-badge me-2">
-                            <i class="bi bi-person fs-3 text-primary"></i>
+                            <i class="bi bi-person fs-4 text-black"></i>
                         </div>
                         <span class="profile-text">Bonjour <strong>Admin</strong></span>
                     </div>
