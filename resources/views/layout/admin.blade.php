@@ -266,11 +266,9 @@
                 <i class="bi bi-people sidebar-icon"></i>
                 <span class="sidebar-text">Liste des clients</span>
             </a>
-<<<<<<< HEAD:GestionDesVoyages/resources/views/layout/admin.blade.php
-            <a href="{{ route('voyages.index') }}" class="sidebar-item">
-=======
+
             <a href="" class="sidebar-item">
->>>>>>> main:resources/views/layout/admin.blade.php
+
                 <i class="bi bi-airplane sidebar-icon"></i>
                 <span class="sidebar-text">Gestion des voyages</span>
             </a>

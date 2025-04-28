@@ -13,7 +13,7 @@ class VoyageController extends Controller
     public function index()
 {
     $voyages = Voyage::orderBy('id', 'asc')->paginate(10);
-    return view('voyages.index', compact('voyages'));
+    return view('voyage.voyage', compact('voyages'));
     
 }
  //renvoie le formulaire d'jout d'un  nouveau voyage 
