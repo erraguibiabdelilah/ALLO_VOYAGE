@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VoyageController;
-
+use App\Http\Controllers\ReservationController;
 Route::prefix('')->group(function () {
     Route::get('/user', function () {return view('layout.user');})->name('user');
     Route::get('/admin', function () {return view('layout.admin');})->name('admin');
@@ -30,6 +30,15 @@ Route::prefix('pages')->group(function () {
     Route::get('/profile',[ClientController::class, 'profile'])->name('profile');
 });
 
+//->middleware(['auth'])
+Route::prefix('reservations')->group(function () {
+    Route::get('/', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/create/{voyage}', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/', [ReservationController::class, 'store'])->name('reservations.store');
+    Route::get('/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
+    Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+});
+
 Route::prefix('voyages')->group(function () {
     
     Route::get('/', [VoyageController::class, 'index'])->name('voyages.index');
@@ -40,3 +49,4 @@ Route::prefix('voyages')->group(function () {
     Route::put('/{voyage}', [VoyageController::class, 'update'])->name('voyages.update');
     Route::delete('/{voyage}', [VoyageController::class, 'destroy'])->name('voyages.destroy');
 });
+

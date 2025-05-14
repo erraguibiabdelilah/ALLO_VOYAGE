@@ -1,64 +1,104 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
+use App\Models\Voyage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Facture;
 
 class ReservationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche la liste des réservations de l'utilisateur.
      */
     public function index()
     {
-        //
+        // Récupère les réservations avec pagination (10 par page)
+        $reservations = Reservation::paginate(10);
+
+        // Passe la variable $reservations à la vue
+        return view('reservations.index', compact('reservations'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Affiche le formulaire de réservation.
      */
-    public function create()
+    public function create(Voyage $voyage)
     {
-        //
+        return view('reservations.create', [
+            'voyage' => $voyage,
+            'placesDisponibles' => range(1, $voyage->places_disponibles)
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Enregistre une nouvelle réservation.
      */
     public function store(Request $request)
     {
-        //
+        // Validation des données
+        $request->validate([
+            'prenom' => 'required|string',
+            'nom' => 'required|string',
+            'telephone' => 'required|string',
+            'nbrplace' => 'required|integer',
+            'payment_method' => 'required|in:paypal,especes',
+            'voyage_id' => 'required|exists:voyages,id',
+        ]);
+
+        // Créer une nouvelle réservation
+        $reservation = new Reservation();
+        $reservation->prenom = $request->prenom;
+        $reservation->nom = $request->nom;
+        $reservation->telephone = $request->telephone;
+        $reservation->nbrplace = $request->nbrplace;
+        $reservation->payment_method = $request->payment_method;
+        $reservation->voyage_id = $request->voyage_id;
+        $reservation->statut = 'confirmée';
+        $reservation->date = now();
+        $reservation->save();
+
+        // Réduire le nombre de places disponibles
+        $voyage = Voyage::find($request->voyage_id);
+        $voyage->places_disponibles -= $request->nbrplace;
+        $voyage->save();
+
+        return redirect()->route('reservations.index')->with('success', 'Réservation réussie !');
     }
 
     /**
-     * Display the specified resource.
+     * Affiche les détails d'une réservation.
      */
-    public function show(string $id)
+    public function show(Reservation $reservation)
     {
-        //
+        if ($reservation->voyageur_id !== Auth::id()) {
+            abort(403);
+        }
+
+        return view('reservations.show', compact('reservation'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Annule une réservation.
      */
-    public function edit(string $id)
+    public function destroy(Reservation $reservation)
     {
-        //
-    }
+        if ($reservation->voyageur_id !== Auth::id()) {
+            abort(403);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        if ($reservation->statut === 'confirmée') {
+            // Libérer les places
+            $reservation->voyage->increment('places_disponibles', $reservation->nbrplace);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            // Marquer la réservation comme annulée
+            $reservation->update(['statut' => 'annulée']);
+
+            return redirect()->route('reservations.index')
+                             ->with('success', 'Réservation annulée avec succès !');
+        }
+
+        return back()->with('error', 'Impossible d\'annuler cette réservation.');
     }
 }

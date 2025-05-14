@@ -59,9 +59,9 @@ public function update(Request $request, Voyage $voyage)
         'places_disponibles' => 'required|integer|min:0',
         'description' => 'nullable|string',
         'lieu_depart' => 'nullable|string',
-    'heure_depart' => 'nullable|date_format:H:i',
-    'heure_arrivee' => 'nullable|date_format:H:i',
-    'nbr_arret' => 'nullable|integer|min:0',
+        'heure_depart' => 'nullable|date_format:H:i',
+        'heure_arrivee' => 'nullable|date_format:H:i',
+        'nbr_arret' => 'nullable|integer|min:0',
     ]);
 
     $voyage->update($validated);
