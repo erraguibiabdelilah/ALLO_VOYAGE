@@ -245,10 +245,17 @@
                         <span class="badge-number">2</span>
                     </div>
                     <div class="d-flex align-items-center me-2 me-lg-3">
-                        <div class="notification-badge me-2">
-                            <i class="bi bi-person fs-4 text-black"></i>
+                        <div class="dropdown">
+                        <div class="profile-icon mx-2" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
-                        <span class="profile-text">Bonjour <strong>Admin</strong></span>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><p class="dropdown-item" href="#">Hello  {{Auth::user()->name}}</p></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                        </ul>
+                    </div>
                     </div>
                 </div>
             </div>

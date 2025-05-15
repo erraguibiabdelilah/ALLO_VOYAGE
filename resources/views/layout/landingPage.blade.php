@@ -253,6 +253,10 @@
         .section-services{
             margin-top: 10rem;
         }
+        a{
+            text-decoration: none;
+            color : #000000;
+        }
 
 
     </style>
@@ -283,7 +287,7 @@
 
                 <div class="d-flex align-items-center me-3" id="profileSection">
                     <div class="notification-badge">
-                        <i class="bi bi-person fs-5 text-primary"></i> Mon compte
+                       <a href="{{ route('login') }}"> <i class="bi bi-person fs-5 text-primary"></i> Mon compte</a>
                     </div>
                 </div>
             </div>
