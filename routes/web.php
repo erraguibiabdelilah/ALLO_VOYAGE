@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\LoginConttroller;
 Route::prefix('')->group(function () {
     Route::get('/user', function () {return view('layout.user');})->name('user');
     Route::get('/admin', function () {return view('layout.admin');})->name('admin');
@@ -40,7 +41,7 @@ Route::prefix('reservations')->group(function () {
 });
 
 Route::prefix('voyages')->group(function () {
-    
+
     Route::get('/', [VoyageController::class, 'index'])->name('voyages.index');
     Route::get('/create', [VoyageController::class, 'create'])->name('voyages.create');
     Route::post('/', [VoyageController::class, 'store'])->name('voyages.store');
@@ -50,3 +51,7 @@ Route::prefix('voyages')->group(function () {
     Route::delete('/{voyage}', [VoyageController::class, 'destroy'])->name('voyages.destroy');
 });
 
+Route::get('/login', [LoginConttroller::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginConttroller::class, 'login'])->name('loginPost');
+Route::post('/register', [ClientController::class, 'register'])->name('register');
+Route::match(['get', 'post'], '/logout', [LoginConttroller::class, 'logout'])->name('logout');
