@@ -247,10 +247,10 @@
                     <div class="d-flex align-items-center me-2 me-lg-3">
                         <div class="dropdown">
                         <div class="profile-icon mx-2" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            A
                         </div>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><p class="dropdown-item" href="#">Hello  {{Auth::user()->name}}</p></li>
+                            <li><p class="dropdown-item" href="#">Hello  </p></li>
                             <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>

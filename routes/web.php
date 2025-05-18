@@ -5,6 +5,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\LoginConttroller;
+use App\Http\Controllers\SearchController;
 Route::prefix('')->group(function () {
     Route::get('/user', function () {return view('layout.user');})->name('user');
     Route::get('/admin', function () {return view('layout.admin');})->name('admin');
@@ -51,7 +52,15 @@ Route::prefix('voyages')->group(function () {
     Route::delete('/{voyage}', [VoyageController::class, 'destroy'])->name('voyages.destroy');
 });
 
-Route::get('/login', [LoginConttroller::class, 'showLoginForm'])->name('login');
+Route::get('/authentification', [LoginConttroller::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginConttroller::class, 'login'])->name('loginPost');
 Route::post('/register', [ClientController::class, 'register'])->name('register');
 Route::match(['get', 'post'], '/logout', [LoginConttroller::class, 'logout'])->name('logout');
+
+
+
+Route::get( '/resultSearch',function(){return view('Pages.resultSearch');})->name('resultSearch');
+Route::post('voyage/search',[SearchController::class ,'findByDepartAndDestinationAndDepartDate'])->name('findVoyage');
+
+
+

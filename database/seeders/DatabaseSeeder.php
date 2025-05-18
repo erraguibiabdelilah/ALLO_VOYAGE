@@ -15,9 +15,15 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+       User::create([
+        'name' => 'user',
+        'email' => 'user@user.com',
+        'password' => 'user123', // pas de bcrypt si 'hashed' est activé dans le modèle
+    ]);
+    Admin::create([
+        'name' => 'Admin',
+        'email' => 'admin@admin.com',
+        'password' => 'admin123', // pas de bcrypt si 'hashed' est activé dans le modèle
+    ]);
     }
 }

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->time('heure_depart')->nullable();
             $table->time('heure_arrivee')->nullable();
             $table->integer('nbr_arret')->default(0);
-        
+
             $table->timestamps();
         });
     }

@@ -324,7 +324,8 @@
   <!-- Carte de recherche de voyage avec Bootstrap 5 -->
   <div class="container-fluid p-0 search">
     <div class="search-card bg-white rounded shadow">
-        <form>
+        <form action="{{ route('findVoyage') }}" method="POST">
+            @csrf
             <div class="row mx-0 align-items-center">
                 <!-- Départ -->
                 <div class="col-md">
@@ -333,9 +334,9 @@
                         <div class="destination-selector">
                             <select id="departSelect" class="form-select border-0 fs-6 fw-bold orange-text" name="depart" placeholder="Ville de départ">
                                 <option value="">Départ</option>
-                                <option value="AGA">Agadir</option>
+                                <option value="Agadir">Agadir</option>
                                 <option value="CMN">Casablanca</option>
-                                <option value="RAK">Marrakech</option>
+                                <option value="Marrakech">Marrakech</option>
                                 <option value="TNG">Tanger</option>
                             </select>
                         </div>
@@ -356,9 +357,9 @@
                         <div class="destination-selector">
                             <select id="arriveeSelect" class="form-select border-0 fs-6 fw-bold text-muted" name="arrivee" placeholder="Ville d'arrivée">
                                 <option value="">Arrivée</option>
-                                <option value="AGA">Agadir</option>
+                                <option value="Agadir">Agadir</option>
                                 <option value="CMN">Casablanca</option>
-                                <option value="RAK">Marrakech</option>
+                                <option value="Marrakech">Marrakech</option>
                                 <option value="TNG">Tanger</option>
                             </select>
                         </div>
@@ -400,7 +401,7 @@
                 <!-- Bouton de recherche -->
                 <div class="col-md-2">
 
-                    <button type="submit" class="btn btn-outline-primary bg-orange w-100 py-3 fw-bold text-white hover:text-primary">Rechercher</button>
+                    <button type="submit" class="btn btn-outline-primary bg-orange w-100 py-3 fw-bold text-white hover:text-primary" onclick="{{ redirect('authentification') }}">Rechercher</button>
                 </div>
             </div>
         </form>
