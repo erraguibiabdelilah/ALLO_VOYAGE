@@ -279,7 +279,7 @@
                 <i class="bi bi-airplane sidebar-icon"></i>
                 <span class="sidebar-text">Gestion des voyages</span>
             </a>
-            <a href="" class="sidebar-item">
+            <a href="{{ route('reservations.store')}}" class="sidebar-item">
                 <i class="bi bi-calendar-check sidebar-icon"></i>
                 <span class="sidebar-text">Liste des réservations</span>
             </a>
