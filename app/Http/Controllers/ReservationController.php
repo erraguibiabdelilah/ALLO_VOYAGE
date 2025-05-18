@@ -63,8 +63,9 @@ class ReservationController extends Controller
         $voyage = Voyage::find($request->voyage_id);
         $voyage->places_disponibles -= $request->nbrplace;
         $voyage->save();
+    
 
-        return redirect()->route('reservations.store')->with('success', 'Réservation réussie !');
+        return redirect()->route('paiement')->with('success', 'Réservation réussie !');
     }
 
     /**

@@ -5,6 +5,8 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\LoginConttroller;
+use App\Http\Controllers\PaiementController;
+
 Route::prefix('')->group(function () {
     Route::get('/user', function () {return view('layout.user');})->name('user');
     Route::get('/admin', function () {return view('layout.admin');})->name('admin');
@@ -39,6 +41,7 @@ Route::prefix('reservations')->group(function () {
     Route::get('/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
     Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 });
+Route::get('/paiement', [PaiementController::class, 'index'])->name('paiement');
 
 Route::prefix('voyages')->group(function () {
 

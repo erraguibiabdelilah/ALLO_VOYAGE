@@ -252,7 +252,7 @@
                                 <i class="fas fa-lock me-1"></i> Sécurisé
                             </div>
                         </div>
-                        <div class="payment-method selected mb-3">
+                       <div class="payment-method selected mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="payment_method" id="paypalPayment" value="paypal" checked />
                                 <label class="form-check-label" for="paypalPayment">
@@ -327,6 +327,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <script>
+      
      const prixVoyage = {{ $voyage->prix }};
     const fraisReservation = 5;
     const nbrplaceInput = document.getElementById('nbrplace');
