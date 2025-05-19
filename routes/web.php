@@ -6,6 +6,11 @@ use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\LoginConttroller;
 use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\AdminController;
+
+Route::resource('admins', AdminController::class);
+
+
 
 Route::prefix('')->group(function () {
     Route::get('/user', function () {return view('layout.user');})->name('user');

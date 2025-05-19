@@ -245,20 +245,29 @@
                         <span class="badge-number">2</span>
                     </div>
                     <div class="d-flex align-items-center me-2 me-lg-3">
-                        <div class="dropdown">
-                        <div class="profile-icon mx-2" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                       <div class="dropdown">
+                                <div class="profile-icon mx-2 bg-primary text-white fw-bold text-center"
+                                    id="profileDropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    style="width: 35px; height: 35px; border-radius: 50%; line-height: 35px;">
+                                    @if(Auth::guard('admin')->check())
+                                        {{ strtoupper(substr(Auth::guard('admin')->admin()->name, 0, 1)) }}
+                                    @endif
+                                </div>
+
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                    @if(Auth::guard('admin')->check())
+                                        <li class="dropdown-item">Hello {{ Auth::guard('admin')->admin()->name }}</li>
+                                    @endif
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                                </ul>
                         </div>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><p class="dropdown-item" href="#">Hello  {{Auth::user()->name}}</p></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                        </ul>
-                    </div>
-                    </div>
-                </div>
-            </div>
+
+                       </div>
+        </div>
         </div>
     </nav>
 
@@ -283,6 +292,12 @@
                 <i class="bi bi-calendar-check sidebar-icon"></i>
                 <span class="sidebar-text">Liste des réservations</span>
             </a>
+          @if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->email === 'admin@admin.com')
+    <a href="{{ route('admins.index')}}" class="sidebar-item">
+        <i class="bi bi-shield-lock sidebar-icon"></i>
+        <span class="sidebar-text">Gestion des admins</span>
+    </a>
+@endif
         </div>
     </div>
 
