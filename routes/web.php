@@ -5,14 +5,14 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\LoginConttroller;
-<<<<<<< HEAD
+
 use App\Http\Controllers\SearchController;
-=======
+
 use App\Http\Controllers\PaiementController;
 
->>>>>>> f67c342da50141646d94779231b8b3d79f28a1bb
+
 Route::prefix('')->group(function () {
-    Route::get('/user', function () {return view('layout.user');})->name('user');
+    Route::get('/user', function () {return view('pages.userSearch');})->name('user');
     Route::get('/admin', function () {return view('layout.admin');})->name('admin');
     Route::get('/', function () {return view('layout.landingPage'); })->name('landingPage');
 });
@@ -40,7 +40,7 @@ Route::prefix('pages')->group(function () {
 //->middleware(['auth'])
 Route::prefix('reservations')->group(function () {
     Route::get('/', [ReservationController::class, 'index'])->name('reservations.index');
-    Route::get('/create/{voyage}', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::get('/create/{id}', [ReservationController::class, 'create'])->name('reservations.create');
     Route::post('/', [ReservationController::class, 'store'])->name('reservations.store');
     Route::get('/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
     Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
@@ -67,6 +67,7 @@ Route::match(['get', 'post'], '/logout', [LoginConttroller::class, 'logout'])->n
 
 Route::get( '/resultSearch',function(){return view('Pages.resultSearch');})->name('resultSearch');
 Route::post('voyage/search',[SearchController::class ,'findByDepartAndDestinationAndDepartDate'])->name('findVoyage');
+Route::get('voyage/search',[SearchController::class ,'findByDepartAndDestinationAndDepartDate'])->name('findVoyage');
 
 
 

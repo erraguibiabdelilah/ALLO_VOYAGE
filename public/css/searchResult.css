@@ -178,16 +178,16 @@
         }
 
         .select-btn {
-            background-color: #ff6600;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            padding: 10px 20px;
+            background-color: #ff6600 !important;
+            border: none !important;
+            border-radius: 8px !important;
+            color: white !important;
+            font-weight: 600 !important;
+            padding: 10px 20px !important;
         }
 
         .select-btn:hover {
-            background-color: #e65c00;
+            background-color: #e65c00 !important;
         }
 
 
@@ -348,16 +348,15 @@
             min-width: 400px;
         }
         .journey-image img {
-            width: 70%;
-            margin-left: 15%;
-
+            width: 60%;
+            margin-left: 20%;
             height: auto;
-            border-radius: 5px;
+
         }
         .journey-header {
             border-bottom: 1px solid #dee2e6;
             padding-bottom: 15px;
-            margin-bottom: 15px;
+
         }
         .time-location {
             position: relative;
@@ -409,3 +408,4 @@
             transition: filter 0.3s ease;
             pointer-events: none;
         }
+

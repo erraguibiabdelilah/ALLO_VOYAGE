@@ -332,13 +332,14 @@
                     <div class="form-group position-relative">
                         <label for="departSelect" class="fw-bold text-uppercase text-muted small">Départ</label>
                         <div class="destination-selector">
-                            <select id="departSelect" class="form-select border-0 fs-6 fw-bold orange-text" name="depart" placeholder="Ville de départ">
-                                <option value="">Départ</option>
-                                <option value="Agadir">Agadir</option>
-                                <option value="CMN">Casablanca</option>
-                                <option value="Marrakech">Marrakech</option>
-                                <option value="TNG">Tanger</option>
-                            </select>
+                                                 <select class="form-select" name="villeDepart">
+                            <option selected>Ville de départ</option>
+                            <option>Casablanca</option>
+                            <option value="Marrakech">Marrakech</option>
+                            <option value="Agadir">Agadir</option>
+                            <option>Rabat</option>
+                            <option>Fès</option>
+                        </select>
                         </div>
                     </div>
                 </div>
@@ -355,13 +356,14 @@
                     <div class="form-group position-relative">
                         <label for="arriveeSelect" class="fw-bold text-uppercase text-muted small">Arrivée</label>
                         <div class="destination-selector">
-                            <select id="arriveeSelect" class="form-select border-0 fs-6 fw-bold text-muted" name="arrivee" placeholder="Ville d'arrivée">
-                                <option value="">Arrivée</option>
-                                <option value="Agadir">Agadir</option>
-                                <option value="CMN">Casablanca</option>
-                                <option value="Marrakech">Marrakech</option>
-                                <option value="TNG">Tanger</option>
-                            </select>
+                           <select class="form-select" name="villeArrive">
+                            <option selected>Ville d'arrivée</option>
+                            <option>Casablanca</option>
+                            <option value="Marrakech">Marrakech</option>
+                            <option value="Agadir">Agadir</option>
+                            <option>Rabat</option>
+                            <option>Fès</option>
+                        </select>
                         </div>
                     </div>
                 </div>
@@ -371,8 +373,7 @@
                     <div class="form-group position-relative">
                         <label for="dateAller" class="fw-bold text-uppercase text-muted small">Date Aller</label>
                         <div class="date-selector">
-                            <input type="date" class="form-control border-0 fs-5 fw-bold orange-text" id="dateAller" name="dateAller">
-                            <input type="hidden" id="dateAllerValue" name="dateAllerValue">
+                             <input type="date" class="form-control" id="date" name="datedepart">
                         </div>
                     </div>
                 </div>
@@ -382,8 +383,7 @@
                     <div class="form-group position-relative">
                         <label for="dateRetour" class="fw-bold text-uppercase text-muted small">Date Retour</label>
                         <div class="date-selector">
-                            <input type="date" class="form-control border-0 fs-5 fw-bold text-muted" id="dateRetour" name="dateRetour" placeholder="Date Retour">
-                            <input type="hidden" id="dateRetourValue" name="dateRetourValue">
+                              <input type="date" class="form-control" id="date" name="datearrivé">
                         </div>
                     </div>
                 </div>
@@ -459,38 +459,6 @@
         </div>
     </div>
 </section>
-
-
-    <!-- Modal pour sélection des dates -->
-    <div class="modal fade" id="dateModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Sélectionnez vos dates</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Date aller</label>
-                                <div id="dateAllerCalendar"></div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label class="form-label">Date retour (optionnel)</label>
-                                <div id="dateRetourCalendar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="applyDates">Appliquer</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

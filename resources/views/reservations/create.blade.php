@@ -1,12 +1,7 @@
-<!-- resources/views/reservation.blade.php -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Réservation de Voyage</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+@extends('layout.user')
+@section('content')
+<body>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -142,8 +137,6 @@
             align-items: center;
         }
     </style>
-</head>
-<body>
     @if(session('success'))
     <div class="alert alert-success container mt-3">
         {{ session('success') }}
@@ -320,14 +313,14 @@
             Confirmer la réservation
         </button>
     </div>
-   
+
 </div>
 </div>
  </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
 <script>
-      
+
      const prixVoyage = {{ $voyage->prix }};
     const fraisReservation = 5;
     const nbrplaceInput = document.getElementById('nbrplace');
@@ -354,7 +347,7 @@
     }
 
     function validateForm() {
-        const isValid = 
+        const isValid =
             prenom.value.trim() !== '' &&
             nom.value.trim() !== '' &&
             telephone.value.trim() !== '' &&
@@ -371,6 +364,6 @@
 
     validateForm();
 </script>
-</body>
-</html>
+
+@endsection
 

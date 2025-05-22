@@ -24,11 +24,13 @@ class ReservationController extends Controller
     /**
      * Affiche le formulaire de réservation.
      */
-    public function create(Voyage $voyage)
+    public function create($id)
     {
+        
+        $voyage=Voyage::where('id',$id)->first();
         return view('reservations.create', [
             'voyage' => $voyage,
-            'placesDisponibles' => range(1, $voyage->places_disponibles)
+            'placesDisponibles' => $voyage->places_disponibles ? range(1, $voyage->places_disponibles) :1,
         ]);
     }
 
@@ -63,7 +65,7 @@ class ReservationController extends Controller
         $voyage = Voyage::find($request->voyage_id);
         $voyage->places_disponibles -= $request->nbrplace;
         $voyage->save();
-    
+
 
         return redirect()->route('paiement')->with('success', 'Réservation réussie !');
     }

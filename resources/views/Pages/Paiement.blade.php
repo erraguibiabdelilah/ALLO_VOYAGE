@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Paiement avec PayPal</title>
-    <style>
+@extends('layout.user')
+@section('content')
+<body>
+     <style>
         html, body {
             height: 100%;
             margin: 0;
         }
         body {
+            margin-top: 3rem;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center; /* centre horizontalement */
             align-items: center;     /* centre verticalement */
-            height: 100vh;           /* hauteur pleine vue */
-            background-color: #f0f0f0;
+                    
+
         }
         .container {
             display: flex;
@@ -64,8 +63,6 @@
             margin-top: 40px;
         }
     </style>
-</head>
-<body>
    <div>
        <h1 style="text-align:center; margin-bottom: 20px;">Paiement via PayPal</h1>
        <div class="container">
@@ -130,4 +127,4 @@
         }).render('#paypal-button-container');
     </script>
 </body>
-</html>
+@endsection

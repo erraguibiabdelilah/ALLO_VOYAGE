@@ -34,7 +34,13 @@ class LoginConttroller extends Controller
 
         // Sinon, on tente avec le guard user (web)
         if (User::where('email', $credentials['email'])->exists()) {
+            //tester si la seion est vide concernat la rcherche
             if (Auth::guard('web')->attempt($credentials)) {
+                if (session()->has('rechercheData')) {
+                 $dataRecherche = session()->pull('rechercheData');
+                    return redirect()->route('findVoyage', $dataRecherche);
+                    }
+                else
                 return redirect()->intended('/user');
             } else {
                 return back()->withErrors(['email' => 'Mot de passe incorrect pour utilisateur']);
@@ -49,15 +55,15 @@ class LoginConttroller extends Controller
     {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-            return redirect('/login');
+            return redirect('/authentification');
         }
 
         if (Auth::guard('web')->check()) {
             Auth::guard('web')->logout();
-            return redirect('/login');
+            return redirect('/authentification');
         }
 
-        return redirect('/login');
+        return redirect('/authentification');
     }
 }
 
