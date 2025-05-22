@@ -18,7 +18,7 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped">
+       <table class="table table-bordered align-middle text-center">
             <thead class="table-warning">
                 <tr>
                     <th>ID</th>
@@ -40,7 +40,7 @@
 
                      <!--  Recuperation des voyages d'apres la bese de donne cree  -->           
                 @foreach($voyages as $voyage)
-                <tr class="{{ $loop->iteration % 2 == 0 ? 'table-light' : 'table-info' }}">
+                <tr class="{{ $loop->even ? 'table-light' : '' }}" style="{{ $loop->odd ? 'background-color: #d1ecf1;' : '' }}">
                     <td class="align-middle">{{ $voyage->id }}</td>
                     <td class="align-middle">{{ $voyage->lieu_depart }}</td>
                     <td class="align-middle">{{ $voyage->destination }}</td>

@@ -9,6 +9,11 @@ use App\Http\Controllers\LoginConttroller;
 use App\Http\Controllers\SearchController;
 
 use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\AdminController;
+
+Route::resource('admins', AdminController::class);
+
+
 
 
 Route::prefix('')->group(function () {

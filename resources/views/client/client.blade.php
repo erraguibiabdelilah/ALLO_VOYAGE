@@ -19,9 +19,9 @@
     </div>
 
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-bordered table-striped">
             <thead class="table-warning">
-                <tr>
+                <tr class="text-center align-middle">
                     <th>Utilisateur</th>
                     <th>Prénom</th>
                     <th>Nom</th>
@@ -33,44 +33,47 @@
             </thead>
             <tbody>
                 @foreach($clients ?? [] as $client)
-                <tr class="{{ $loop->iteration % 2 == 0 ? 'table-light' : 'table-info' }}">
-                    <td class="align-middle">
+                <tr class="{{ $loop->even ? 'bg-light' : 'bg-white' }}">
+                    <td class="text-center align-middle">
                         <i class="bi bi-person-circle text-secondary"></i>
                     </td>
-                    <td class="align-middle">Jhon</td>
-                    <td class="align-middle">Doe</td>
-                    <td class="align-middle">1996-10-01</td>
-                    <td class="align-middle">jhon@gmail.com</td>
-                    <td class="align-middle">+232 666-666666</td>
-                    <td class="align-middle">
-                        <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#modifierClientModal">
-                            <i class="bi bi-pencil-square text-white"></i>
-                        </button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#supprimerClientModal">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                    <td class="text-center align-middle">Jhon</td>
+                    <td class="text-center align-middle">Doe</td>
+                    <td class="text-center align-middle">1996-10-01</td>
+                    <td class="text-center align-middle">jhon@gmail.com</td>
+                    <td class="text-center align-middle">+232 666-666666</td>
+                    <td class="text-center align-middle">
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#modifierClientModal">
+                                <i class="bi bi-pencil-square text-white"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#supprimerClientModal">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
                 @endforeach
 
-                <!-- Rows for demonstration purposes -->
                 @for($i = 0; $i < 6; $i++)
-                <tr class="{{ $i % 2 == 0 ? 'table-light' : 'table-info' }}">
-                    <td class="align-middle">
+                <tr class="{{ $i % 2 == 0 ? 'bg-light' : 'bg-white' }}">
+                    <td class="text-center align-middle">
                         <i class="bi bi-person-circle text-secondary"></i>
                     </td>
-                    <td class="align-middle">Jhon</td>
-                    <td class="align-middle">Doe</td>
-                    <td class="align-middle">1996-10-01</td>
-                    <td class="align-middle">jhon@gmail.com</td>
-                    <td class="align-middle">+232 666-666666</td>
-                    <td class="align-middle">
-                        <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#modifierClientModal" data-id="{{ $i }}">
-                            <i class="bi bi-pencil-square text-white"></i>
-                        </button>
-                        <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#supprimerClientModal" data-id="{{ $i }}">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                    <td class="text-center align-middle">Jhon</td>
+                    <td class="text-center align-middle">Doe</td>
+                    <td class="text-center align-middle">1996-10-01</td>
+                    <td class="text-center align-middle">jhon@gmail.com</td>
+                    <td class="text-center align-middle">+232 666-666666</td>
+                    <td class="text-center align-middle">
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-sm btn-info me-1" data-bs-toggle="modal" data-bs-target="#modifierClientModal" data-id="{{ $i }}">
+                                <i class="bi bi-pencil-square text-white"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#supprimerClientModal" data-id="{{ $i }}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
                     </td>
                 </tr>
                 @endfor
@@ -222,18 +225,12 @@
 </div>
 
 <script>
-    // Script pour récupérer les infos client pour l'édition
     document.addEventListener('DOMContentLoaded', function() {
         const modifierModal = document.getElementById('modifierClientModal');
         if (modifierModal) {
             modifierModal.addEventListener('show.bs.modal', function(event) {
                 const button = event.relatedTarget;
                 const id = button.getAttribute('data-id');
-
-                // Ici vous pouvez faire une requête AJAX pour obtenir les données du client
-                // Pour l'exemple, nous utilisons des données statiques
-
-                // Update form action URL
                 const form = document.getElementById('editForm');
                 form.action = form.action.replace(':id', id);
             });
@@ -244,8 +241,6 @@
             supprimerModal.addEventListener('show.bs.modal', function(event) {
                 const button = event.relatedTarget;
                 const id = button.getAttribute('data-id');
-
-                // Update form action URL
                 const form = document.getElementById('deleteForm');
                 form.action = form.action.replace(':id', id);
             });

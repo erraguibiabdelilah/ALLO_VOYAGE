@@ -60,12 +60,14 @@ class ReservationController extends Controller
         $reservation->statut = 'confirmée';
         $reservation->date = now();
         $reservation->save();
-
         // Réduire le nombre de places disponibles
         $voyage = Voyage::find($request->voyage_id);
         $voyage->places_disponibles -= $request->nbrplace;
         $voyage->save();
+<<<<<<< HEAD
 
+=======
+>>>>>>> d4f92da3a43c02682860c50480ebdf7579b1e7e6
 
         return redirect()->route('paiement')->with('success', 'Réservation réussie !');
     }
