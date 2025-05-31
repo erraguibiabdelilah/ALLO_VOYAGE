@@ -245,22 +245,6 @@
                         <span class="badge-number">2</span>
                     </div>
                     <div class="d-flex align-items-center me-2 me-lg-3">
-<<<<<<< HEAD
-                        <div class="dropdown">
-                        <div class="profile-icon mx-2" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            A
-                        </div>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><p class="dropdown-item" href="#">Hello  </p></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                        </ul>
-                    </div>
-                    </div>
-                </div>
-            </div>
-=======
                        <div class="dropdown">
                                 <div class="profile-icon mx-2 bg-primary text-white fw-bold text-center"
                                     id="profileDropdown"
@@ -284,7 +268,7 @@
 
                        </div>
         </div>
->>>>>>> d4f92da3a43c02682860c50480ebdf7579b1e7e6
+
         </div>
     </nav>
 

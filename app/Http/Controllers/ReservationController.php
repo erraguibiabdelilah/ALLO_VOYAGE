@@ -26,7 +26,7 @@ class ReservationController extends Controller
      */
     public function create($id)
     {
-        
+
         $voyage=Voyage::where('id',$id)->first();
         return view('reservations.create', [
             'voyage' => $voyage,
@@ -64,10 +64,7 @@ class ReservationController extends Controller
         $voyage = Voyage::find($request->voyage_id);
         $voyage->places_disponibles -= $request->nbrplace;
         $voyage->save();
-<<<<<<< HEAD
 
-=======
->>>>>>> d4f92da3a43c02682860c50480ebdf7579b1e7e6
 
         return redirect()->route('paiement')->with('success', 'Réservation réussie !');
     }
@@ -103,7 +100,6 @@ class ReservationController extends Controller
             return redirect()->route('reservations.index')
                              ->with('success', 'Réservation annulée avec succès !');
         }
-
         return back()->with('error', 'Impossible d\'annuler cette réservation.');
     }
 }

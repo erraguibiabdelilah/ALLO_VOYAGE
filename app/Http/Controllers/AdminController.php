@@ -46,11 +46,11 @@ class AdminController extends Controller
 
     // Méthode pour modifier un admin existant
     public function update(Request $request, $id)
-    {   
+    {
          if (!$this->isMainAdmin()) {
         abort(403, 'Accès non autorisé');
     }
-        $admin = User::findOrFail($id);
+        $admin = Admin::findOrFail($id);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
