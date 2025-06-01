@@ -8,10 +8,11 @@ use App\Http\Controllers\LoginConttroller;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\NotificationController;
 
 Route::resource('admins', AdminController::class);
 Route::prefix('')->group(function () {
-    Route::get('/user', function () {return view('pages.userSearch');})->name('user');
+    Route::get('/user',[ClientController::class, 'index'])->name('user');
     Route::get('/admin', function () {return view('layout.admin');})->name('admin');
     Route::get('/', function () {return view('layout.landingPage'); })->name('landingPage');
 });
@@ -44,7 +45,7 @@ Route::prefix('reservations')->group(function () {
     Route::get('/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
     Route::delete('/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 });
-Route::get('/paiement', [PaiementController::class, 'index'])->name('paiement');
+Route::get('/paiement/{total?}/{nbrplace?}', [PaiementController::class, 'index'])->name('paiement');
 
 Route::prefix('voyages')->group(function () {
 
@@ -67,6 +68,7 @@ Route::match(['get', 'post'], '/logout', [LoginConttroller::class, 'logout'])->n
 Route::get( '/resultSearch',function(){return view('Pages.resultSearch');})->name('resultSearch');
 Route::post('voyage/search',[SearchController::class ,'findByDepartAndDestinationAndDepartDate'])->name('findVoyage');
 Route::get('voyage/search',[SearchController::class ,'findByDepartAndDestinationAndDepartDate'])->name('findVoyage');
+Route::post('/savePaiment',[NotificationController::class ,'create'])->name('notifications.create');
 
 
 

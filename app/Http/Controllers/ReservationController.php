@@ -6,6 +6,8 @@ use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Facture;
+use Illuminate\Support\Facades\Session;
+use App\Models\Notification;
 
 class ReservationController extends Controller
 {
@@ -16,6 +18,7 @@ class ReservationController extends Controller
     {
         // Récupère les réservations avec pagination (10 par page)
         $reservations = Reservation::paginate(10);
+
 
         // Passe la variable $reservations à la vue
         return view('reservations.index', compact('reservations'));
@@ -28,9 +31,15 @@ class ReservationController extends Controller
     {
 
         $voyage=Voyage::where('id',$id)->first();
+         $notifications = Notification::where('voyageur_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $count = $notifications->where('estLu', false)->count();
         return view('reservations.create', [
             'voyage' => $voyage,
             'placesDisponibles' => $voyage->places_disponibles ? range(1, $voyage->places_disponibles) :1,
+            'notifications' => $notifications,
+            'count'=> $count,
         ]);
     }
 
@@ -64,9 +73,14 @@ class ReservationController extends Controller
         $voyage = Voyage::find($request->voyage_id);
         $voyage->places_disponibles -= $request->nbrplace;
         $voyage->save();
+        $total= (($request->nbrplace)*($voyage->prix))+5;
 
 
-        return redirect()->route('paiement')->with('success', 'Réservation réussie !');
+
+
+
+        return redirect()->route('paiement', ['total' => $total , 'nbrplace' => $request->nbrplace,])
+                         ->with('success', 'Réservation réussie !');
     }
 
     /**

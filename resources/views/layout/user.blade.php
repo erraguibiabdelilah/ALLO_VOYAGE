@@ -7,12 +7,10 @@
     <title>Allo Voyage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/searchResult.css') }}">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-
 
     <style>
         /* Styles personnalisés */
@@ -89,6 +87,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .notification-badge {
@@ -329,36 +328,37 @@
 
             <!-- Contenu de la navbar -->
             <div class="navbar-content">
-                <div  id="toggleSidebar">
-
+                <div id="toggleSidebar">
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="notification-badge me-2 me-lg-3 mx-2" id="notificationBell">
                         <i class="bi bi-bell fs-5 text-black"></i>
-                        <span class="badge-number">2</span>
+                        <span class="badge-number">{{$count}}</span>
                     </div>
 
                     <div class="notification-badge me-2 me-lg-3 mx-2" id="messageBell">
                         <i class="bi bi-chat-left-dots fs-5 text-black "></i>
-                        <span class="badge-number">2</span>
+                        <span class="badge-number">*</span>
                     </div>
 
                     <div class="d-flex align-items-center me-2 me-lg-3">
-                        <div class="dropdown">
-                        <div class="profile-icon mx-2  bg-primary" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- Section profil avec ID correct -->
+                        <div class="profile-icon mx-2 bg-primary" id="profileSection">
                             {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                         </div>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><p class="dropdown-item" href="#">Hello
-                          {{Auth::user()->name}} </p></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
-                        </ul>
-                    </div>
-                        </div>
-                        </div>
 
+                        <!-- Dropdown Bootstrap séparé (optionnel) -->
+                        <div class="dropdown d-none">
+                            <div class="profile-icon mx-2 bg-primary" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            </div>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <li><p class="dropdown-item" href="#">Hello {{Auth::user()->name}}</p></li>
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -372,85 +372,25 @@
             <button class="close-btn" id="closeNotificationModal">&times;</button>
         </div>
         <div class="notification-body">
-            <!-- Notification Item 1 -->
-            <div class="notification-item d-flex align-items-start">
-                <div class="notification-avatar">
-                    <img src="{{ asset('images/avatar1.jpg') }}" alt="Terry Franci" onerror="this.src='https://via.placeholder.com/36'">
-                </div>
-                <div class="notification-content flex-grow-1">
-                    <div class="notification-title">
-                        <strong>Terry Franci</strong> requests permission to change <strong>Project - Nganter App</strong>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-1">
-                        <div class="notification-info">
-                            <span>Project</span>
+            @foreach ($notifications as $notification)
+                <div class="notification-item d-flex align-items-start {{ $notification->estLu ? '' : 'unread' }}">
+                    <div class="notification-content flex-grow-1">
+                        <div class="notification-title">
+                            <strong>{{ $notification->content }}</strong>
                         </div>
-                        <div class="notification-meta">
-                            <span>5 min ago</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Notification Item 2 -->
-            <div class="notification-item d-flex align-items-start">
-                <div class="notification-avatar">
-                    <img src="{{ asset('images/avatar2.jpg') }}" alt="Alena Franci" onerror="this.src='https://via.placeholder.com/36'">
-                </div>
-                <div class="notification-content flex-grow-1">
-                    <div class="notification-title">
-                        <strong>Alena Franci</strong> requests permission to change <strong>Project - Nganter App</strong>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-1">
-                        <div class="notification-info">
-                            <span>Project</span>
-                        </div>
-                        <div class="notification-meta">
-                            <span>8 min ago</span>
+                        <div class="d-flex justify-content-between align-items-center mt-1">
+                            <div class="notification-info">
+                                <span class="badge {{ $notification->estLu ? 'bg-success' : 'bg-warning' }}">
+                                    {{ $notification->estLu ? 'Lu' : 'Non lu' }}
+                                </span>
+                            </div>
+                            <div class="notification-meta d-flex align-items-center">
+                                <span class="me-2">1min ago</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Notification Item 3 -->
-            <div class="notification-item d-flex align-items-start">
-                <div class="notification-avatar">
-                    <img src="{{ asset('images/avatar3.jpg') }}" alt="Jocelyn Kenter" onerror="this.src='https://via.placeholder.com/36'">
-                </div>
-                <div class="notification-content flex-grow-1">
-                    <div class="notification-title">
-                        <strong>Jocelyn Kenter</strong> requests permission to change <strong>Project - Nganter App</strong>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-1">
-                        <div class="notification-info">
-                            <span>Project</span>
-                        </div>
-                        <div class="notification-meta">
-                            <span>15 min ago</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Notification Item 4 -->
-            <div class="notification-item d-flex align-items-start">
-                <div class="notification-avatar">
-                    <img src="{{ asset('images/avatar4.jpg') }}" alt="Brandon Philips" onerror="this.src='https://via.placeholder.com/36'">
-                </div>
-                <div class="notification-content flex-grow-1">
-                    <div class="notification-title">
-                        <strong>Brandon Philips</strong> requests permission to change <strong>Project - Nganter App</strong>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mt-1">
-                        <div class="notification-info">
-                            <span>Project</span>
-                        </div>
-                        <div class="notification-meta">
-                            <span>1 hr ago</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="notification-footer">
             <a href="#" class="text-primary text-decoration-none">View All Notification</a>
@@ -505,7 +445,25 @@
         </div>
     </div>
 
-
+    <!-- Modal de profil personnalisé -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-menu-item">
+            <i class="bi bi-person"></i>
+            <span>Hello {{Auth::user()->name}}</span>
+        </div>
+        <div class="profile-menu-item">
+            <i class="bi bi-person-circle"></i>
+            <span>Profile</span>
+        </div>
+        <div class="profile-menu-item">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+        </div>
+        <div class="profile-menu-item">
+            <i class="bi bi-box-arrow-right"></i>
+            <a href="{{ route('logout') }}" class="text-decoration-none text-dark">Logout</a>
+        </div>
+    </div>
 
     <!-- Contenu principal -->
     <div class="main-content" id="mainContent">
@@ -525,61 +483,96 @@
             const closeNotificationModal = document.getElementById('closeNotificationModal');
             const closeMessageModal = document.getElementById('closeMessageModal');
 
+            // Vérification que tous les éléments existent
+            console.log('Elements found:', {
+                notificationBell: !!notificationBell,
+                messageBell: !!messageBell,
+                profileSection: !!profileSection,
+                notificationModal: !!notificationModal,
+                messageModal: !!messageModal,
+                profileModal: !!profileModal
+            });
+
             // Fonction pour fermer tous les modals
             function closeAllModals() {
-                notificationModal.style.display = 'none';
-                messageModal.style.display = 'none';
-                profileModal.style.display = 'none';
+                if (notificationModal) notificationModal.style.display = 'none';
+                if (messageModal) messageModal.style.display = 'none';
+                if (profileModal) profileModal.style.display = 'none';
             }
 
             // Fonctions pour gérer l'ouverture et la fermeture des modals
             function toggleNotificationModal() {
                 closeAllModals();
-                notificationModal.style.display = 'block';
+                if (notificationModal) {
+                    notificationModal.style.display = 'block';
+                    console.log('Notification modal opened');
+                }
             }
 
             function toggleMessageModal() {
                 closeAllModals();
-                messageModal.style.display = 'block';
+                if (messageModal) {
+                    messageModal.style.display = 'block';
+                    console.log('Message modal opened');
+                }
             }
 
             function toggleProfileModal() {
                 closeAllModals();
-                profileModal.style.display = 'block';
+                if (profileModal) {
+                    profileModal.style.display = 'block';
+                    console.log('Profile modal opened');
+                }
             }
 
-            // Événements
-            notificationBell.addEventListener('click', function(event) {
-                event.stopPropagation();
-                toggleNotificationModal();
-            });
+            // Événements avec vérification d'existence
+            if (notificationBell) {
+                notificationBell.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    console.log('Notification bell clicked');
+                    toggleNotificationModal();
+                });
+            }
 
-            messageBell.addEventListener('click', function(event) {
-                event.stopPropagation();
-                toggleMessageModal();
-            });
+            if (messageBell) {
+                messageBell.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    console.log('Message bell clicked');
+                    toggleMessageModal();
+                });
+            }
 
-            profileSection.addEventListener('click', function(event) {
-                event.stopPropagation();
-                toggleProfileModal();
-            });
+            if (profileSection) {
+                profileSection.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    console.log('Profile section clicked');
+                    toggleProfileModal();
+                });
+            }
 
-            closeNotificationModal.addEventListener('click', function() {
-                notificationModal.style.display = 'none';
-            });
+            if (closeNotificationModal) {
+                closeNotificationModal.addEventListener('click', function() {
+                    if (notificationModal) notificationModal.style.display = 'none';
+                });
+            }
 
-            closeMessageModal.addEventListener('click', function() {
-                messageModal.style.display = 'none';
-            });
+            if (closeMessageModal) {
+                closeMessageModal.addEventListener('click', function() {
+                    if (messageModal) messageModal.style.display = 'none';
+                });
+            }
 
             // Ferme les modals si on clique en dehors
             document.addEventListener('click', function(event) {
-                if (!notificationBell.contains(event.target) &&
-                    !messageBell.contains(event.target) &&
-                    !profileSection.contains(event.target) &&
-                    !notificationModal.contains(event.target) &&
-                    !messageModal.contains(event.target) &&
-                    !profileModal.contains(event.target)) {
+                const clickedInsideModal =
+                    (notificationModal && notificationModal.contains(event.target)) ||
+                    (messageModal && messageModal.contains(event.target)) ||
+                    (profileModal && profileModal.contains(event.target)) ||
+                    (notificationBell && notificationBell.contains(event.target)) ||
+                    (messageBell && messageBell.contains(event.target)) ||
+                    (profileSection && profileSection.contains(event.target));
+
+                if (!clickedInsideModal) {
                     closeAllModals();
                 }
             });

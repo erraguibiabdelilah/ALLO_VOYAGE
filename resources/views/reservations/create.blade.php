@@ -298,6 +298,7 @@
                 <div class="total-price">
                 <div>Total</div>
                 <div id="totalPrice">{{ $voyage->prix + 5 }} DH</div>
+
             </div>
         </div>
 

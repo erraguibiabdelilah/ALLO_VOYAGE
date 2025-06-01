@@ -2,26 +2,26 @@
 @section('content')
 <body>
      <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
+
         body {
-            margin-top: 3rem;
+            margin-top: 10rem;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center; /* centre horizontalement */
-            align-items: center;     /* centre verticalement */
-                    
+            align-items: center;
+            height: 100%;
+            width : 100% ;
+            overflow: hidden  /* centre verticalement */
 
         }
+
         .container {
             display: flex;
             gap: 40px;
             background: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(252, 136, 3, 0.534);
             max-width: 900px;
             width: 90%;
         }
@@ -29,13 +29,13 @@
             flex: 1;
             border: 1px solid #ccc;
             padding: 20px;
-            max-width: 400px;
+            max-width: 600px;
             background-color: #f9f9f9;
             border-radius: 6px;
         }
         .paiement {
             flex: 1;
-            max-width: 400px;
+            max-width: 600px;
         }
         h1, h2 {
             margin-top: 0;
@@ -64,11 +64,11 @@
         }
     </style>
    <div>
-       <h1 style="text-align:center; margin-bottom: 20px;">Paiement via PayPal</h1>
+
        <div class="container">
            <!-- Partie facture (gauche) -->
            <div class="facture">
-               <h2>Facture</h2>
+               <h2 class="text-center">Facture</h2>
                <p><strong>Réservation :</strong></p>
                <table>
                    <tr>
@@ -79,33 +79,46 @@
                    </tr>
                    <tr>
                        <td>Voyage </td>
-                       <td>20 €</td>
-                       <td>2</td>
-                       <td>40 €</td>
+                       <td>
+                        @if (isset($nbrplace))
+                           {{ ($total-5) / $nbrplace}}
+                        @endif
+                       </td>
+                       <td>{{$nbrplace}}</td>
+                       <td>{{ $total - 5 }}</td>
                    </tr>
                    <tr>
                        <td>Frais de service</td>
                        <td colspan="2"></td>
-                       <td>5 €</td>
+                       <td>5 DH</td>
                    </tr>
                </table>
-               <p class="total">Total à payer : {{ $total }} €</p>
+               <p class="total">Total à payer :{{ $total }} DH</p>
            </div>
 
            <!-- Partie paiement (droite) -->
            <div class="paiement">
-               <h2>Effectuer le paiement</h2>
+               <h3 class="text-center ">Effectuer le paiement</h2>
                <!-- Conteneur pour le bouton PayPal -->
                <div id="paypal-button-container"></div>
            </div>
        </div>
    </div>
 
+    <!-- Formulaire pour créer la notification après paiement -->
+    <form id="notification-form" method="POST" action="{{ route('notifications.create') }}" style="display: none;">
+        @csrf
+        <input type="hidden" id="notification-titre" name="titre" value="">
+        <input type="hidden" id="notification-content" name="content" value="">
+        <input type="hidden" name="voyageur_id" value="{{ auth()->id() }}">
+        <input type="hidden" id="payment-details" name="payment_details" value="">
+    </form>
+
     <!-- Script PayPal -->
     <script src="https://www.paypal.com/sdk/js?client-id=Aa-SflJqXqi9ZQDNq9fEkcLgRk3aT2_4Ap_nwIx0seEfxnLMzShSO5cdM0ZPSWoHYMgVw8vsK23acZXB"></script>
 
     <script>
-        const total = {{ $total }};
+        const total = {{ $total / 10 }};
 
         paypal.Buttons({
             createOrder: function(data, actions) {
@@ -119,9 +132,21 @@
             },
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(details) {
+                    // Remplir les champs du formulaire avec les détails du paiement
+                    document.getElementById('notification-titre').value = 'Paiement PayPal effectué avec succès';
+                    document.getElementById('notification-content').value = `Votre paiement de ${total}€ via PayPal a été traité avec succès. Transaction ID: ${data.orderID}. Payé par: ${details.payer.name.given_name} ${details.payer.name.surname}. Merci pour votre réservation!`;
+                    document.getElementById('payment-details').value = JSON.stringify({
+                        orderId: data.orderID,
+                        payerId: details.payer.payer_id,
+                        payerName: details.payer.name.given_name + ' ' + details.payer.name.surname,
+                        amount: total,
+                        currency: 'EUR'
+                    });
+
                     alert('Transaction completed by ' + details.payer.name.given_name);
-                    // Ici tu peux rediriger ou afficher un message de confirmation
-                    alert('hhhhhhhhhhhhhhhh');
+
+                    // Soumettre le formulaire pour créer la notification
+                    document.getElementById('notification-form').submit();
                 });
             }
         }).render('#paypal-button-container');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Notification;
 
 class ClientController extends Controller
 {
@@ -27,7 +28,7 @@ class ClientController extends Controller
 
 
     Auth::login($user);
-    return redirect('/admin');
+    return redirect('/user');
     }
 
     /**
@@ -35,7 +36,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return view('client.client');
+        $notifications = Notification::where('voyageur_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $count = $notifications->where('estLu', false)->count();
+        return view('pages.userSearch',compact('notifications', 'count'));
     }
 
     /**

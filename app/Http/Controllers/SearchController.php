@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Voyage;
-
+use App\Models\Notification;
+use Illuminate\Support\Facades\Auth;
 class SearchController extends Controller
 {
     public function findByDepartAndDestinationAndDepartDate(Request $request)
@@ -31,10 +32,16 @@ class SearchController extends Controller
 
         // Choix de la vue selon si la recherche venait de la session ou non
         $view = session()->has('rechercheData') ? 'pages.resultUserSearch' : 'pages.resultSearch';
+        $notifications = Notification::where('voyageur_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $unreadCount = $notifications->where('estLu', false)->count();
 
         return view($view, [
             'voyages' => $voyages,
-            'message' => $message
+            'message' => $message,
+            'notifications' => $notifications,
+            'count' => $unreadCount,
         ]);
     }
 }
