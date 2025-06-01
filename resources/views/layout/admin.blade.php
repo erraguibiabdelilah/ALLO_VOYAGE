@@ -252,13 +252,13 @@
                                     aria-expanded="false"
                                     style="width: 35px; height: 35px; border-radius: 50%; line-height: 35px;">
                                     @if(Auth::guard('admin')->check())
-                                        {{ strtoupper(substr(Auth::guard('admin')->admin()->name, 0, 1)) }}
+                                        {{ strtoupper(substr(Auth::guard('admin')->user()->name, 0, 1)) }}
                                     @endif
                                 </div>
 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                                     @if(Auth::guard('admin')->check())
-                                        <li class="dropdown-item">Hello {{ Auth::guard('admin')->admin()->name }}</li>
+                                        <li class="dropdown-item">Hello {{ Auth::guard('admin')->user()->name }}</li>
                                     @endif
                                     <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
                                     <li><hr class="dropdown-divider"></li>
@@ -279,11 +279,7 @@
                 <i class="bi bi-house-door sidebar-icon"></i>
                 <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="{{ route('clients.index') }}" class="sidebar-item">
-                <i class="bi bi-people sidebar-icon"></i>
-                <span class="sidebar-text">Liste des clients</span>
-            </a>
-
+           
             <a href="{{ route('voyages.index') }}" class="sidebar-item">
 
                 <i class="bi bi-airplane sidebar-icon"></i>

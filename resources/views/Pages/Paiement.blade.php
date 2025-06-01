@@ -64,7 +64,11 @@
         }
     </style>
    <div>
-
+   <!-- Alerte Bootstrap (cachée par défaut) -->
+    <div id="success-alert" class="alert alert-success alert-dismissible fade success-alert" role="alert" style="display: none;">
+        <strong>Succès !</strong> Votre paiement est réussi et votre réservation bien enregistrée.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
        <div class="container">
            <!-- Partie facture (gauche) -->
            <div class="facture">
@@ -147,9 +151,24 @@
 
                     // Soumettre le formulaire pour créer la notification
                     document.getElementById('notification-form').submit();
+                    showSuccessAlert();
                 });
             }
         }).render('#paypal-button-container');
+
+         function showSuccessAlert() {
+            const alert = document.getElementById('success-alert');
+            alert.style.display = 'block';
+            alert.classList.add('show');
+
+            // Masquer automatiquement après 3 secondes
+            setTimeout(() => {
+                alert.classList.remove('show');
+                setTimeout(() => {
+                    alert.style.display = 'none';
+                }, 150); // Attendre la fin de l'animation fade
+            }, 5000);
+        }
     </script>
 </body>
 @endsection

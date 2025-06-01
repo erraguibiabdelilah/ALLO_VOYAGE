@@ -2,6 +2,32 @@
 
 @section('content')
 <div class="container-fluid mt-5">
+    <!-- Ajoutez ceci au début de votre vue, après <div class="container-fluid mt-5"> -->
+
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
     <h3 class="mb-4">Liste des voyages</h3>
 
     <div class="d-flex justify-content-between mb-3">
@@ -9,12 +35,7 @@
             Ajouter un voyage
         </button>
 
-        <div class="input-group" style="width: 250px;">
-            <input type="text" class="form-control" placeholder="Rechercher">
-            <button class="btn btn-outline-primary" type="button">
-                <i class="bi bi-search"></i> Rechercher
-            </button>
-        </div>
+        
     </div>
 
     <div class="table-responsive">
@@ -38,29 +59,29 @@
 
 
 
-                     <!--  Recuperation des voyages d'apres la bese de donne cree  -->           
+                     <!--  Recuperation des voyages d'apres la bese de donne cree  -->
                 @foreach($voyages as $voyage)
                 <tr class="{{ $loop->even ? 'table-light' : '' }}" style="{{ $loop->odd ? 'background-color: #d1ecf1;' : '' }}">
                     <td class="align-middle">{{ $voyage->id }}</td>
                     <td class="align-middle">{{ $voyage->lieu_depart }}</td>
                     <td class="align-middle">{{ $voyage->destination }}</td>
-                    <td class="align-middle">{{ $voyage->date_depart->format('d/m/Y') }}</td>
-                    <td class="align-middle">{{ $voyage->date_retour->format('d/m/Y') }}</td>
+                    <td class="align-middle">{{ $voyage->date_depart }}</td>
+                    <td class="align-middle">{{ $voyage->date_retour }}</td>
                     <td class="align-middle">{{ $voyage->heure_depart }}</td>
                     <td class="align-middle">{{ $voyage->heure_arrivee }}</td>
                     <td class="align-middle">{{ number_format($voyage->prix, 2) }}</td>
                     <td class="align-middle">{{ $voyage->places_disponibles }}</td>
                     <td class="align-middle">{{ $voyage->nbr_arret }}</td>
                     <td class="align-middle">
-                        <button class="btn btn-sm btn-info me-1" 
-                                data-bs-toggle="modal" 
+                        <button class="btn btn-sm btn-info me-1"
+                                data-bs-toggle="modal"
                                 data-bs-target="#modifierVoyageModal"
                                 data-id="{{ $voyage->id }}"
                                  data-depart="{{ $voyage->lieu_depart }}"
                                 data-destination="{{ $voyage->destination }}"
-                                 
-                                data-date_depart="{{ $voyage->date_depart->format('Y-m-d') }}"
-                                data-date_retour="{{ $voyage->date_retour->format('Y-m-d') }}"
+
+                                data-date_depart="{{ $voyage->date_depart }}"
+                                data-date_retour="{{ $voyage->date_retour }}"
                                  data-heure_depart="{{ $voyage->heure_depart }}"
                                   data-heure_arrivee="{{ $voyage->heure_arrivee }}"
                                    data-nbr_arret="{{ $voyage->nbr_arret }}"
@@ -69,8 +90,8 @@
                                 data-description="{{ $voyage->description }}">
                             <i class="bi bi-pencil-square text-white"></i>
                         </button>
-                        <button class="btn btn-sm btn-danger" 
-                                data-bs-toggle="modal" 
+                        <button class="btn btn-sm btn-danger"
+                                data-bs-toggle="modal"
                                 data-bs-target="#supprimerVoyageModal"
                                 data-id="{{ $voyage->id }}"
                                 data-destination="{{ $voyage->destination }}">
@@ -123,7 +144,7 @@
                             <input type="text" class="form-control" id="destination" name="destination" required>
                         </div>
                     </div>
-                    
+
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="date_depart" class="form-label">Date de départ*</label>
@@ -304,7 +325,7 @@
                 const button = event.relatedTarget;
                 const form = document.getElementById('deleteForm');
 
-                document.getElementById('voyageInfo').innerHTML = 
+                document.getElementById('voyageInfo').innerHTML =
                     `Voyage #${button.dataset.id} : <strong>${button.dataset.destination}</strong>`;
 
                 form.action = `/voyages/${button.dataset.id}`;

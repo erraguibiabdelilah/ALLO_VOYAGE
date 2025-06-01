@@ -14,9 +14,9 @@ class VoyageController extends Controller
 {
     $voyages = Voyage::orderBy('id', 'asc')->paginate(10);
     return view('voyage.voyage', compact('voyages'));
-    
+
 }
- //renvoie le formulaire d'jout d'un  nouveau voyage 
+ //renvoie le formulaire d'jout d'un  nouveau voyage
 
 public function create()
 {
@@ -32,13 +32,14 @@ public function store(Request $request)
         'prix' => 'required|numeric|min:0',
         'places_disponibles' => 'required|integer|min:1',
         'description' => 'nullable|string',
-    'lieu_depart' => 'nullable|string',
+         'lieu_depart' => 'nullable|string',
         'heure_depart' => 'nullable|date_format:H:i',
         'heure_arrivee' => 'nullable|date_format:H:i',
         'nbr_arret' => 'nullable|integer|min:0',
     ]);
 
     Voyage::create($validated);
+   
 
     return redirect()->route('voyages.index')
                  ->with('success', 'Voyage créé avec succès');

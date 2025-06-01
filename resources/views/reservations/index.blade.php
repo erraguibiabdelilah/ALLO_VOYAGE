@@ -1,7 +1,7 @@
 @extends('layout.admin')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid " style="margin-top: 3rem">
     <h2 class="mb-3">Liste des Réservations</h2>
 
     @if(session('success'))
