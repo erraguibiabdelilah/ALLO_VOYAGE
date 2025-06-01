@@ -61,7 +61,7 @@
 
                      <!--  Recuperation des voyages d'apres la bese de donne cree  -->
                 @foreach($voyages as $voyage)
-                <tr class="{{ $loop->even ? 'table-light' : '' }}" style="{{ $loop->odd ? 'background-color: #d1ecf1;' : '' }}">
+               <tr class="{{ $loop->even ? 'table-light' : '' }}" style="{{ $loop->odd ? 'background-color: #d1ecf1;' : '' }}">
                     <td class="align-middle">{{ $voyage->id }}</td>
                     <td class="align-middle">{{ $voyage->lieu_depart }}</td>
                     <td class="align-middle">{{ $voyage->destination }}</td>
