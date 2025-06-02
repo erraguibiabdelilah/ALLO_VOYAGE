@@ -26,7 +26,7 @@ class LoginConttroller extends Controller
         // 🔐 D'abord, on vérifie si l'email correspond à un admin
         if (Admin::where('email', $credentials['email'])->exists()) {
             if (Auth::guard('admin')->attempt($credentials)) {
-                return redirect()->intended('/admin');
+                return redirect()->intended('/pages/dashboard');
             } else {
                 return back()->withErrors(['email' => 'Mot de passe incorrect pour admin']);
             }
@@ -55,15 +55,15 @@ class LoginConttroller extends Controller
     {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-            return redirect('/authentification');
+            return redirect('/');
         }
 
         if (Auth::guard('web')->check()) {
             Auth::guard('web')->logout();
-            return redirect('/authentification');
+            return redirect('/');
         }
 
-        return redirect('/authentification');
+        return redirect('/');
     }
 }
 
