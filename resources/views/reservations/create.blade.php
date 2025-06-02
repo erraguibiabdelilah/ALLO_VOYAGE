@@ -159,6 +159,7 @@
          <form action="{{ route('reservations.store')}}" method="POST">
                 @csrf
                 <input type="hidden" name="voyage_id" value="{{ $voyage->id }}">
+                <input type="hidden" name="voyageur_id" value="{{Auth::user()->id}}">
                 <!-- Accordéon politique d'annulation -->
                 <div class="accordion mb-4" id="politiqueAccordion">
                     <div class="accordion-item">

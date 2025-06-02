@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('places_disponibles');
             $table->text('description')->nullable();
             $table->string('lieu_depart')->nullable();
-            $table->time('heure_depart')->nullable();
-            $table->time('heure_arrivee')->nullable();
+            $table->string('heure_depart', 5)->nullable();  // Format HH:mm
+            $table->string('heure_arrivee', 5)->nullable(); // Format HH:mm
             $table->integer('nbr_arret')->default(0);
 
             $table->timestamps();

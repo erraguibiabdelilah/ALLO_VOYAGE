@@ -7,7 +7,7 @@
             <div class="row align-items-center g-3">
                 <!-- DE (Ville de départ) -->
                 <div class="col-lg-2 col-md-6 col-12 position-relative">
-                    <span class="label-text">Départ</span>
+                    <span class="label-text">Ville de départ</span>
                     <div class="input-group">
                         <select class="form-select" name="villeDepart">
                             <option selected>Ville de départ</option>
@@ -22,15 +22,15 @@
 
                 <!-- À (Ville d'arrivée) -->
                 <div class="col-lg-2 col-md-6 col-12">
-                    <span class="label-text">Arrivée</span>
+                    <span class="label-text">Ville d'arrivée</span>
                     <div class="input-group">
                         <select class="form-select" name="villeArrive">
-                            <option selected>Ville d'arrivée</option>
-                            <option>Casablanca</option>
+                            <option selected value="">Ville d'arrivée</option>
+                            <option value="Casablanca">Casablanca</option>
                             <option value="Marrakech">Marrakech</option>
                             <option value="Agadir">Agadir</option>
-                            <option>Rabat</option>
-                            <option>Fès</option>
+                            <option value="Rabat">Rabat</option>
+                            <option value="Fès">Fès</option>
                         </select>
                     </div>
                 </div>

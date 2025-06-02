@@ -13,6 +13,30 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
     <style>
+
+        .select-btn {
+            background-color: #ff6600 !important;
+            border: none !important;
+            border-radius: 8px !important;
+            color: white !important;
+            font-weight: 600 !important;
+            padding: 10px 20px !important;
+            box-shadow: 0 5px 10px rgba(255, 102, 0, 0.3) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .select-btn:hover {
+            background-color: #e65c00 !important;
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .highlight-text {
+            color: #ff6a00;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
         /* Styles personnalisés */
         body {
             overflow-x: hidden;
@@ -338,7 +362,7 @@
 
                     <div class="notification-badge me-2 me-lg-3 mx-2" id="messageBell">
                         <i class="bi bi-chat-left-dots fs-5 text-black "></i>
-                        <span class="badge-number">*</span>
+                        <span class="badge-number">2</span>
                     </div>
 
                     <div class="d-flex align-items-center me-2 me-lg-3">
@@ -353,10 +377,21 @@
                                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                             </div>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                <li><p class="dropdown-item" href="#">Hello {{Auth::user()->name}}</p></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i>  {{Auth::user()->name}}</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"><i class="fa-solid fa-clipboard-check"></i> Réservations</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Paramètres</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket"></i> Se déconnecter</a>
+                                </i> 
                             </ul>
                         </div>
                     </div>
@@ -407,7 +442,7 @@
             <!-- Message Item 1 -->
             <div class="notification-item d-flex align-items-start">
                 <div class="notification-avatar">
-                    <img src="{{ asset('images/avatar1.jpg') }}" alt="Terry Franci" onerror="this.src='https://via.placeholder.com/36'">
+                    <img src="{{ asset('images/profile-user.png') }}" alt="Terry Franci" onerror="this.src='https://via.placeholder.com/36'">
                 </div>
                 <div class="notification-content flex-grow-1">
                     <div class="notification-title">
@@ -425,7 +460,7 @@
             <!-- Message Item 2 -->
             <div class="notification-item d-flex align-items-start">
                 <div class="notification-avatar">
-                    <img src="{{ asset('images/avatar2.jpg') }}" alt="Alena Franci" onerror="this.src='https://via.placeholder.com/36'">
+                    <img src="{{ asset('images/profile-user.png') }}" alt="Alena Franci" onerror="this.src='https://via.placeholder.com/36'">
                 </div>
                 <div class="notification-content flex-grow-1">
                     <div class="notification-title">
@@ -449,19 +484,17 @@
     <div class="profile-modal" id="profileModal">
         <div class="profile-menu-item">
             <i class="bi bi-person"></i>
-            <span>Hello {{Auth::user()->name}}</span>
+            <span>{{Auth::user()->name}}</span>
         </div>
         <div class="profile-menu-item">
-            <i class="bi bi-person-circle"></i>
-            <span>Profile</span>
+            <a class="dropdown-item" href="/myreservations"><i class="bi bi-card-checklist"></i> Réservations</a>
         </div>
         <div class="profile-menu-item">
-            <i class="bi bi-gear"></i>
-            <span>Settings</span>
+            <a class="dropdown-item" href="/profile"><i class="bi bi-gear"></i> Paramètres</a>
         </div>
         <div class="profile-menu-item">
             <i class="bi bi-box-arrow-right"></i>
-            <a href="{{ route('logout') }}" class="text-decoration-none text-dark">Logout</a>
+            <a href="{{ route('logout') }}" class="text-decoration-none text-dark">Se déconnecter</a>
         </div>
     </div>
 

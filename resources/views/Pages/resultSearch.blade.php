@@ -7,56 +7,56 @@
             <div class="row align-items-center g-3">
                 <!-- DE (Ville de départ) -->
                 <div class="col-lg-2 col-md-6 col-12 position-relative">
-                    <span class="label-text">Départ</span>
-                    <div class="input-group">
-                        <select class="form-select" name="villeDepart">
-                            <option selected>Ville de départ</option>
-                            <option>Casablanca</option>
+                    <label for="departSelect" class="fw-bold small" style="color:#ff6a00">De</label>
+                    <div class="input-group mt-2">
+                        <select class="form-select" name="villeDepart" required>
+                            <option selected value="">Ville de départ</option>
+                            <option value="Casablanca">Casablanca</option>
                             <option value="Marrakech">Marrakech</option>
                             <option value="Agadir">Agadir</option>
-                            <option>Rabat</option>
-                            <option>Fès</option>
+                            <option value="Rabat">Rabat</option>
+                            <option value="Fès">Fès</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- À (Ville d'arrivée) -->
                 <div class="col-lg-2 col-md-6 col-12">
-                    <span class="label-text">Arrivée</span>
-                    <div class="input-group">
-                        <select class="form-select" name="villeArrive">
-                            <option selected>Ville d'arrivée</option>
-                            <option>Casablanca</option>
+                    <label for="departSelect" class="fw-bold small" style="color:#ff6a00">À</label>
+                    <div class="input-group mt-2">
+                        <select class="form-select" name="villeArrive" required>
+                            <option selected value="">Ville d'arrivée</option>
+                            <option value="Casablanca">Casablanca</option>
                             <option value="Marrakech">Marrakech</option>
                             <option value="Agadir">Agadir</option>
-                            <option>Rabat</option>
-                            <option>Fès</option>
+                            <option value="Rabat">Rabat</option>
+                            <option value="Fès">Fès</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- DÉPART (Date de départ) -->
                 <div class="col-lg-2 col-md-6 col-12">
-                    <span class="label-text">Date départ</span>
-                    <div class="input-group">
-                        <input type="date" class="form-control" id="date" name="datedepart">
+                    <span class="label-text">Date de départ</span>
+                    <div class="input-group mt-2">
+                        <input type="date" class="form-control" id="date" name="datedepart" required>
                     </div>
                 </div>
 
                 <!-- RETOUR (Date de retour) -->
                 <div class="col-lg-2 col-md-6 col-12">
-                    <span class="label-text">Date Arrivée</span>
-                    <div class="input-group">
+                    <span class="label-text">Date d'arrivée</span>
+                    <div class="input-group mt-2">
                         <input type="date" class="form-control" id="date" name="datearrivee">
                     </div>
                 </div>
 
                 <!-- PASSAGERS (Nombre de passagers) -->
                 <div class="col-lg-2 col-md-6 col-12">
-                    <span class="label-text">PASSAGERS</span>
-                    <div class="input-group">
+                    <span class="label-text">Passagers</span>
+                    <div class="input-group mt-2">
                         <select class="form-select" name="passagerie">
-                            <option selected value="1">1 Passagers</option>
+                            <option selected value="1">1 Passager</option>
                             <option value="2">2 Passagers</option>
                             <option value="3">3 Passagers</option>
                             <option value="4">4 Passagers</option>
@@ -84,14 +84,15 @@
 
 <div class="container py-4">
     @if(isset($message) && $message)
-        <div class="alert alert-info">
-            {{ $message }}
+        <div class="text-center">
+            <img src="{{ asset('images/not-found.png') }}" alt="No Results Found" class="img-fluid" style="max-width: 400px;">
         </div>
     @endif
 
     @if(count($voyages) > 0)
+    <h2 class="highlight-text mb-4 fw-bold" style="color:#ff6a00"><i class="fa-solid fa-square-check" style="color: #ff6a00"></i> Choisir l'itinéraire</h2>
     @foreach ($voyages as $voyage)
-        <div class="transport-card bg-white">
+        <div class="transport-card bg-white mb-4">
             <div class="card-body p-3">
                 <div class="row align-items-center">
                     <div class="col-12">
@@ -109,9 +110,10 @@
 
                             <!-- Duration -->
                             <div class="col-lg-1 col-md-1 text-center mx-2">
-                                {{ \Carbon\Carbon::parse($voyage->heure_arrivee)->diffInMinutes(\Carbon\Carbon::parse($voyage->heure_depart)) }} minutes
+                                {{ \Carbon\Carbon::parse($voyage->heure_depart)->diffInMinutes(\Carbon\Carbon::parse($voyage->heure_arrivee)) }} minutes
                                 <div class="journey-line position-relative">
-                                    <hr style="border-top: 1px dotted #ccc;">
+                                    <hr style="border-top: 0.5px #ccc;">
+                                    <i class="fa-sharp fa-solid fa-right-long fa-beat fa-2xl" style="color: #ff6600;"></i>
                                 </div>
                             </div>
 
@@ -122,10 +124,14 @@
                                 <div class="station">Gare Routiere de Marrakech</div>
                             </div>
                             <div class="col-lg-3 col-md-3 text-center" style="margin-left: 8rem">
-                                <div class="price">{{$voyage->prix}}</div>
+                                <div class="price">{{$voyage->prix}} DH</div>
                                 <div class="per-person">par personne</div>
 
-                                <button class="btn select-btn w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+                                <button 
+                                    class="select-btn btn btn-outline-primary bg-orange w-100 py-3 fw-bold text-white hover:text-primary mt-2"
+                                    type="button" data-bs-toggle="offcanvas" 
+                                    data-bs-target="#offcanvasRight" 
+                                    aria-controls="offcanvasRight"
                                     data-voyage-id="{{$voyage->id}}"
                                     data-ville-depart="{{$voyage->lieu_depart}}"
                                     data-heure-depart="{{$voyage->heure_depart}}"
@@ -133,7 +139,7 @@
                                     data-heure-arrivee="{{$voyage->heure_arrivee}}"
                                     data-prix="{{$voyage->prix}}"
                                     data-nbr_arret="{{$voyage->nbr_arret}}"
-                                    data-duree="{{ \Carbon\Carbon::parse($voyage->heure_arrivee)->diffInMinutes(\Carbon\Carbon::parse($voyage->heure_depart)) }}">
+                                    data-duree="{{ \Carbon\Carbon::parse($voyage->heure_depart)->diffInMinutes(\Carbon\Carbon::parse($voyage->heure_arrivee)) }}">
                                     Sélectionner
                                 </button>
                             </div>
@@ -169,7 +175,7 @@
                     <strong><span id="heure-depart"></span></strong>
                 </div>
                 <div>
-                    <strong>Gare Routiere de <span id="ville-depart-nom"></span></strong>
+                    <strong><span id="ville-depart-nom"></span></strong>
                     <p class="text-muted mb-0">Gare Routière De <span id="ville-depart-loc"></span></p>
                 </div>
             </div>
@@ -181,7 +187,7 @@
                     <strong><span id="heure-arrivee"></span></strong>
                 </div>
                 <div>
-                    <strong>Gare Routiere de <span id="ville-arrivee-nom"></span></strong>
+                    <strong><span id="ville-arrivee-nom"></span></strong>
                     <p class="text-muted mb-0">Gare Routière <span id="ville-arrivee-loc"></span></p>
                 </div>
             </div>

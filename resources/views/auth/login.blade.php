@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="css/aut.css">
 </head>
 <body>
-
 
 <div class="container" id="container">
     @if ($errors->any())
@@ -19,50 +17,49 @@
         @endforeach
         </ul>
     </div>
-@endif
+    @endif
 
-	<div class="form-container sign-up-container">
-		<form method="POST" action="{{ route('register') }}">
+    <div class="form-container sign-up-container">
+        <form method="POST" action="{{ route('register') }}">
             @csrf
-			<h1>Create Account</h1>
-
-			<span>or use your email for registration</span>
-			<input type="text" placeholder="Name"   name="name" />
-			<input type="email" placeholder="Email"   name="email" />
-			<input type="password" placeholder="Password"   name="password" />
+            <h1>Créer un compte</h1>
+            <span>ou utilisez votre email pour vous inscrire</span>
+            <input type="text" placeholder="Nom" name="name" />
+            <input type="email" placeholder="Email" name="email" />
+            <input type="password" placeholder="Mot de passe" name="password" />
             <input type="password" name="password_confirmation" placeholder="Confirmer mot de passe" required>
+            <button type="submit">S'inscrire</button>
+        </form>
+    </div>
 
-			<button type="submit">Sign Up</button>
-		</form>
-	</div>
-	<div class="form-container sign-in-container">
+    <div class="form-container sign-in-container">
         <form method="POST" action="{{ route('loginPost') }}">
             @csrf
-			<h1>Sign in</h1>
-
-			<span>or use your account</span>
-
+            <h1>Se connecter</h1>
+            <span>ou utilisez votre compte</span>
             <input id="email" type="email" placeholder="Email" name="email" required autofocus>
-            <input id="password" type="password" name="password" placeholder="Password" required>
-			<a href="#">Forgot your password?</a>
-			<button type="submit">Sign In</button>
-		</form>
-	</div>
-	<div class="overlay-container">
-		<div class="overlay">
-			<div class="overlay-panel overlay-left">
-				<h1>Welcome Back!</h1>
-				<p>To keep connected with us please login with your personal info</p>
-				<button class="ghost" id="signIn">Sign In</button>
-			</div>
-			<div class="overlay-panel overlay-right">
-				<h1>Hello, Friend!</h1>
-				<p>Enter your personal details and start journey with us</p>
-				<button class="ghost" id="signUp">Sign Up</button>
-			</div>
-		</div>
-	</div>
+            <input id="password" type="password" name="password" placeholder="Mot de passe" required>
+            <a href="#">Mot de passe oublié ?</a>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>Bon retour !</h1>
+                <p>Pour rester connecté avec nous, veuillez vous connecter avec vos informations personnelles</p>
+                <button class="ghost" id="signIn">Se connecter</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Bonjour !</h1>
+                <p>Entrez vos informations personnelles et commencez votre voyage avec nous</p>
+                <button class="ghost" id="signUp">S'inscrire</button>
+            </div>
+        </div>
+    </div>
 </div>
-<script src ="js/auth.js"></script>
+
+<script src="js/auth.js"></script>
 </body>
 </html>

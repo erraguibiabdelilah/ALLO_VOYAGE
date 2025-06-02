@@ -34,7 +34,6 @@ Route::prefix('client')->group(function () {
 
 Route::prefix('pages')->group(function () {
     Route::get('/dashboard', function () {return view('pages.dashboard');})->name('dashboard');
-    Route::get('/profile',[ClientController::class, 'profile'])->name('profile');
 });
 
 //->middleware(['auth'])
@@ -63,12 +62,13 @@ Route::post('/login', [LoginConttroller::class, 'login'])->name('loginPost');
 Route::post('/register', [ClientController::class, 'register'])->name('register');
 Route::match(['get', 'post'], '/logout', [LoginConttroller::class, 'logout'])->name('logout');
 
-
-
 Route::get( '/resultSearch',function(){return view('Pages.resultSearch');})->name('resultSearch');
 Route::post('voyage/search',[SearchController::class ,'findByDepartAndDestinationAndDepartDate'])->name('findVoyage');
 Route::get('voyage/search',[SearchController::class ,'findByDepartAndDestinationAndDepartDate'])->name('findVoyage');
 Route::post('/savePaiment',[NotificationController::class ,'create'])->name('notifications.create');
 
+Route::get('/myreservations', [ReservationController::class, 'AllMyReservations'])->name('myreservations');
+Route::post('/myreservations/supprimer/{id}', [ReservationController::class, 'supprimer'])->name('supprimer');
 
-
+Route::get('/profile', [ClientController::class, 'profile'])->name('profile');
+Route::put('/profile/update/{id}', [ClientController::class, 'updateProfile'])->name('profile.update');

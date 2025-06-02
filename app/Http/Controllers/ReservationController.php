@@ -24,6 +24,25 @@ class ReservationController extends Controller
         return view('reservations.index', compact('reservations'));
     }
 
+    public function AllMyReservations()
+    {
+        $reservations = Reservation::where('voyageur_id', Auth::id())
+                        ->with('voyage') // Pour charger les relations
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        $notifications = Notification::where('voyageur_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $unreadCount = $notifications->where('estLu', false)->count();
+
+        return view('reservations.myreservations', [
+            'reservations' => $reservations,
+            'notifications' => $notifications,
+            'count' => $unreadCount,
+        ]);
+    }
+
     /**
      * Affiche le formulaire de réservation.
      */
@@ -56,6 +75,7 @@ class ReservationController extends Controller
             'nbrplace' => 'required|integer',
             'payment_method' => 'required|in:paypal,especes',
             'voyage_id' => 'required|exists:voyages,id',
+            'voyageur_id' => 'required|exists:users,id',
         ]);
 
         // Créer une nouvelle réservation
@@ -66,18 +86,16 @@ class ReservationController extends Controller
         $reservation->nbrplace = $request->nbrplace;
         $reservation->payment_method = $request->payment_method;
         $reservation->voyage_id = $request->voyage_id;
+        $reservation->voyageur_id = $request->voyageur_id;
         $reservation->statut = 'confirmée';
         $reservation->date = now();
         $reservation->save();
+
         // Réduire le nombre de places disponibles
         $voyage = Voyage::find($request->voyage_id);
         $voyage->places_disponibles -= $request->nbrplace;
         $voyage->save();
         $total= (($request->nbrplace)*($voyage->prix))+5;
-
-
-
-
 
         return redirect()->route('paiement', ['total' => $total , 'nbrplace' => $request->nbrplace,])
                          ->with('success', 'Réservation réussie !');
@@ -116,4 +134,31 @@ class ReservationController extends Controller
         }
         return back()->with('error', 'Impossible d\'annuler cette réservation.');
     }
+
+    public function supprimer($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        
+        // Vérifier si la réservation appartient à l'utilisateur connecté
+        if ($reservation->voyageur_id !== Auth::id()) {
+            return back()->with('error', 'Vous n\'êtes pas autorisé à annuler cette réservation.');
+        }
+
+        if ($reservation->statut === 'confirmée') {
+            // Libérer les places
+            $voyage = Voyage::find($reservation->voyage_id);
+            $voyage->places_disponibles += $reservation->nbrplace;
+            $voyage->save();
+
+            // Marquer la réservation comme annulée
+            $reservation->statut = 'annulée';
+            $reservation->save();
+
+            return redirect()->route('myreservations')
+                            ->with('success', 'Réservation annulée avec succès !');
+        }
+
+        return back()->with('error', 'Impossible d\'annuler cette réservation.');
+    }
+
 }

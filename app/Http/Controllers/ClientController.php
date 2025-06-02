@@ -11,7 +11,7 @@ class ClientController extends Controller
 {
 
 
-     public function register(Request $request)
+    public function register(Request $request)
     {
     $request->validate([
         'name' => 'required|string|max:255',
@@ -91,8 +91,26 @@ class ClientController extends Controller
         //
     }
 
+
     public function profile()
     {
-        return view('pages.profile');
+        $user = Auth::user();
+
+        $notifications = Notification::where('voyageur_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $count = $notifications->where('estLu', false)->count();
+        
+        return view('client.profile', compact('user', 'notifications', 'count'));
     }
+
+    public function updateProfile(Request $request, $id){
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        // Redirect to the products index with a success message
+        return redirect()->back()->with('success', 'Profil mis à jour avec succès !');
+    }
+
+     
 }

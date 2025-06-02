@@ -9,6 +9,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
+
+        .select-btn {
+            background-color: #ff6600 !important;
+            border: none !important;
+            border-radius: 8px !important;
+            color: white !important;
+            font-weight: 600 !important;
+            box-shadow: 0 15px 26px rgba(255, 102, 0, 0.3) !important;
+            transition: all 0.3s ease !important;
+            height: 100% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .select-btn:hover {
+            background-color: #e65c00 !important;
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4) !important;
+            transform: translateY(-2px) !important;
+        }
+
+        .switch-btn {
+            background-color: transparent;
+            border-color: #dee2e6 !important;
+            padding: 8px;
+        }
+
+        .switch-btn:hover {
+            background-color: transparent !important;
+            border-color: #ff6a00 !important;
+            color: #ff6a00;
+        }
+
+        .switch-btn:active, .switch-btn:focus {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border-color: #ff6a00 !important;
+            color: #ff6a00;
+        }
+
         /* Styles personnalisés */
         body {
             overflow-x: hidden;
@@ -287,7 +327,7 @@
 
                 <div class="d-flex align-items-center me-3" id="profileSection">
                     <div class="notification-badge">
-                       <a href="{{ route('login') }}"> <i class="bi bi-person fs-5 text-primary"></i> Mon compte</a>
+                        <a href="{{ route('login') }}"> <i class="bi bi-person fs-5 text-primary"></i> Se connecter</a>
                     </div>
                 </div>
             </div>
@@ -302,13 +342,12 @@
         <div class="row align-items-center">
             <!-- Colonne texte -->
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <h1 class="hero-title mb-3 ">Book your bus tickets</h1>
-                <h2 class="highlight-text mb-4" style="color:#ff6a00 ">in less than 2 minutes</h2>
+                <h1 class="hero-title mb-3 fw-bold">Réservez vos tickets de bus</h1>
+                <h2 class="highlight-text mb-4 fw-bold" style="color:#ff6a00">en moins de 2 minutes</h2>
                 <p class="lead mb-4">
-                    With <strong>marKoub.ma</strong>, access <strong>100+ operators</strong>, enjoy the best prices, and
-                    pay easily online or in cash.
+                    Avec <strong>AlloVoyage.ma</strong>, accédez à <strong>100+ operators</strong>, profitez des meilleurs prix,
+                    et payez facilement en ligne ou en cash.
                 </p>
-
             </div>
 
             <!-- Colonne image -->
@@ -330,39 +369,39 @@
                 <!-- Départ -->
                 <div class="col-md">
                     <div class="form-group position-relative">
-                        <label for="departSelect" class="fw-bold text-uppercase text-muted small">Départ</label>
-                        <div class="destination-selector">
-                                                 <select class="form-select" name="villeDepart">
-                            <option selected>Ville de départ</option>
-                            <option>Casablanca</option>
-                            <option value="Marrakech">Marrakech</option>
-                            <option value="Agadir">Agadir</option>
-                            <option>Rabat</option>
-                            <option>Fès</option>
-                        </select>
+                        <label for="departSelect" class="fw-bold text-uppercase small" style="color:#ff6a00">De</label>
+                        <div class="destination-selector mt-2">
+                            <select class="form-select" name="villeDepart" required>
+                                <option selected value="">Ville de départ</option>
+                                <option value="Casablanca">Casablanca</option>
+                                <option value="Marrakech">Marrakech</option>
+                                <option value="Agadir">Agadir</option>
+                                <option value="Rabat">Rabat</option>
+                                <option value="Fès">Fès</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
                 <!-- Icône d'échange -->
                 <div class="col-auto px-0 text-center">
-                    <button type="button" id="switchDestinations" class="btn btn-outline-light rounded-circle border">
-                        <i class="bi bi-arrow-left-right "></i>
+                    <button type="button" id="switchDestinations" class="btn rounded-circle border switch-btn">
+                        <i class="bi bi-arrow-left-right"></i>
                     </button>
                 </div>
 
                 <!-- Arrivée -->
                 <div class="col-md">
                     <div class="form-group position-relative">
-                        <label for="arriveeSelect" class="fw-bold text-uppercase text-muted small">Arrivée</label>
-                        <div class="destination-selector">
-                           <select class="form-select" name="villeArrive">
-                            <option selected>Ville d'arrivée</option>
-                            <option>Casablanca</option>
+                        <label for="arriveeSelect" class="fw-bold text-uppercase small" style="color:#ff6a00">À</label>
+                        <div class="destination-selector mt-2">
+                           <select class="form-select" name="villeArrive" required>
+                            <option value="" selected>Ville d'arrivée</option>
+                            <option value="Casablanca">Casablanca</option>
                             <option value="Marrakech">Marrakech</option>
                             <option value="Agadir">Agadir</option>
-                            <option>Rabat</option>
-                            <option>Fès</option>
+                            <option value="Rabat">Rabat</option>
+                            <option value="Fès">Fès</option>
                         </select>
                         </div>
                     </div>
@@ -371,9 +410,9 @@
                 <!-- Date Aller -->
                 <div class="col-md">
                     <div class="form-group position-relative">
-                        <label for="dateAller" class="fw-bold text-uppercase text-muted small">Date Aller</label>
-                        <div class="date-selector">
-                             <input type="date" class="form-control" id="date" name="datedepart">
+                        <label for="dateAller" class="fw-bold text-uppercase small" style="color:#ff6a00">Départ</label>
+                        <div class="date-selector mt-2">
+                             <input type="date" class="form-control" id="date" name="datedepart" required>
                         </div>
                     </div>
                 </div>
@@ -381,8 +420,8 @@
                 <!-- Date Retour -->
                 <div class="col-md">
                     <div class="form-group position-relative">
-                        <label for="dateRetour" class="fw-bold text-uppercase text-muted small">Date Retour</label>
-                        <div class="date-selector">
+                        <label for="dateRetour" class="fw-bold text-uppercase small" style="color:#ff6a00">Retour</label>
+                        <div class="date-selector mt-2">
                               <input type="date" class="form-control" id="date" name="datearrivé">
                         </div>
                     </div>
@@ -391,17 +430,33 @@
                 <!-- Voyageurs -->
                 <div class="col-md">
                     <div class="form-group position-relative">
-                        <label for="voyageurs" class="fw-bold text-uppercase text-muted small">Voyageurs</label>
-                        <div class="traveler-selector">
-                            <input type="number" id="voyageurs" name="nbrVoyageurs" value="1" step="1" min="1" max="10" class="form-control border-0 fs-5 fw-bold orange-text" placeholder="Nombre de voyageurs">
+                        <label for="voyageurs" class="fw-bold text-uppercase small" style="color:#ff6a00">Passagers</label>
+                        {{-- <div class="traveler-selector mt-2">
+                            <input type="number" id="voyageurs" name="nbrVoyageurs" value="1" step="1" min="1" max="10" class="form-control border-0 fs-5 fw-bold" required>
+                        </div> --}}
+                        <div class="input-group mt-2">
+                            <select class="form-select" name="nbrVoyageurs">
+                                <option selected value="1">1 Passager</option>
+                                <option value="2">2 Passagers</option>
+                                <option value="3">3 Passagers</option>
+                                <option value="4">4 Passagers</option>
+                                <option value="5">5 Passagers</option>
+                                <option value="6">6 Passagers</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
                 <!-- Bouton de recherche -->
                 <div class="col-md-2">
-
-                    <button type="submit" class="btn btn-outline-primary bg-orange w-100 py-3 fw-bold text-white hover:text-primary" onclick="{{ redirect('authentification') }}">Rechercher</button>
+                    <div class="form-group position-relative">
+                        <label class="fw-bold text-uppercase small" style="color:#ff6a00">&nbsp;</label>
+                        <div class="mt-2">
+                            <button type="submit" class="select-btn btn btn-outline-primary bg-orange w-100 h-100 fw-bold text-white" style="height: 38px;">
+                                Rechercher
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>

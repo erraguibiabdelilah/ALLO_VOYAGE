@@ -28,7 +28,7 @@ class SearchController extends Controller
                         ->where('destination', $request->villeArrive)
                         ->where('date_depart', $request->datedepart)
                         ->get();
-         $message = $voyages->isEmpty() ? 'No voyages found' : null;
+        $message = $voyages->isEmpty() ? 'Empty' : null;
 
         // Choix de la vue selon si la recherche venait de la session ou non
         $view = session()->has('rechercheData') ? 'pages.resultUserSearch' : 'pages.resultSearch';
