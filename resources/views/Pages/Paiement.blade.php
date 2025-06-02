@@ -78,8 +78,8 @@
                    <tr>
                        <th>Voyage</th>
                        <th>Prix unitaire</th>
-                       <th>Quantité</th>
-                       <th>Prix unitaire</th>
+                       <th>nombre de place </th>
+
                    </tr>
                    <tr>
                        <td>Voyage </td>
@@ -89,7 +89,7 @@
                         @endif
                        </td>
                        <td>{{$nbrplace}}</td>
-                       <td>{{ $total - 5 }}</td>
+                       
                    </tr>
                    <tr>
                        <td>Frais de service</td>

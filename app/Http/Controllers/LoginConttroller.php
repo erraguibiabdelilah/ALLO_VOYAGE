@@ -55,15 +55,15 @@ class LoginConttroller extends Controller
     {
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
-            return redirect('/authentification');
+            return redirect('/');
         }
 
         if (Auth::guard('web')->check()) {
             Auth::guard('web')->logout();
-            return redirect('/authentification');
+            return redirect('/');
         }
 
-        return redirect('/authentification');
+        return redirect('/');
     }
 }
 
