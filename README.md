@@ -107,5 +107,9 @@ Si vous souhaitez contribuer au projet, vous pouvez :
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
 
 ## Contact
-Erraguibi Abdelilah - [@LinkedIn](https://www.linkedin.com/in/erraguibi/)
-Belefqih Mohammed - [@LinkedIn](https://www.linkedin.com/in/mohammedbelefqih/) 
+Si vous avez des questions ou des suggestions, n'hésitez pas à nous contacter :
+
+- Erraguibi Abdelilah - [@LinkedIn](https://www.linkedin.com/in/erraguibi/)
+- Belefqih Mohammed - [@LinkedIn](https://www.linkedin.com/in/mohammedbelefqih/) 
+
+Lien du projet : [https://github.com/erraguibiabdelilah/ALLO_VOYAGE](https://github.com/erraguibiabdelilah/ALLO_VOYAGE)
