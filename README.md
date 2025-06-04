@@ -1,80 +1,111 @@
 # ALLO VOYAGE
 
-## Useful links
+## À propos du projet
+**Allo Voyage** est une application web de réservation de voyages en bus qui permet aux utilisateurs de rechercher, réserver et gérer leurs voyages en toute simplicité.
 
-This is a website for using flexbox [FLEXER](https://www.flexer.dev/).
+## Prérequis
+Pour utiliser ce projet, vous devez avoir installé :
+- PHP 8.1 ou supérieur
+- Composer
+- MySQL ou PhpMyAdmin
+- Laravel 10
+- Node.js et NPM
+- Git
 
-Docs of Tailwind CSS v4.1 : [Tailwind CSS](https://tailwindcss.com/docs/installation/play-cdn).
+## Installation et Configuration
 
-Build websites even faster with components on top of Tailwind CSS : [Flowbite](https://flowbite.com/).
-
-Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS :  [heroicons](https://heroicons.com/)
-
-Course of Tailwind CSS b Darija : [YouTube](https://www.youtube.com/watch?v=IZ5CehCYqcc&list=PLzw5gTKvdr_mbqo5i7OTxu8RK0yGdoECT).
-
-Site web de l'ONCF voyages : [ONCF VOYAGES](https://www.oncf-voyages.ma/)
-
-Site web de CTM : [CTM](https://booking.ctm.ma/)
-
-- [Forms](https://flowbite.com/docs/components/forms/)
-- [Navbar](https://flowbite.com/docs/components/navbar/)
-- [Tables](https://flowbite.com/docs/components/tables/)
-
-## Tools of this project
-
-- **Design** : UML, StartUML
-- **Prototyping** : [Framer](https://www.framer.com/)
-- **Fontend** : HTML5, CSS3, [Tailwind CSS](https://tailwindcss.com/), React
-- **Backend** : PHP ([Laravel 10](https://laravel.com/))
-- **Database** : MySQL
-- **Project management and collaboration** : Git, GitHub & Discord
-- **Other tools** : VS Code, PhpStorm, Material Tailwind  [Sass](https://sass-lang.com/), [sweetalert2](https://sweetalert2.github.io/), Chart.js, Postman
-- **Development methodology** : CASCADE
-
-# Installation and Setup
-
-To set up this project on your local machine:
-1. Clone the repository using HTTPS:
-
+1. Clonez le dépôt avec HTTPS :
 ```bash
-git clone https://github.com/m-belefqih/travel-agency-app.git
+git clone https://github.com/erraguibiabdelilah/ALLO_VOYAGE.git
 ```
 
-2. Navigate to the project directory:
-
+2. Accédez au répertoire du projet :
 ```bash
-cd travel-agency-app
+cd ALLO_VOYAGE
 ```
 
-3. (Optional) To pull the latest changes from the repository, use the `git pull` command:
-
+3. Installez les dépendances PHP avec Composer :
 ```bash
-git pull origin main
+composer install
 ```
 
-# Push your local repository to github from command line
-```git
-git remote add origin https://github.com/m-belefqih/ALLO-VOYAGE.git
-git push -u origin main
+4. Installez les dépendances JavaScript :
+```bash
+npm install
 ```
 
-## Les pages de ce projet
+5. Créez une copie du fichier .env :
+```bash
+cp .env.example .env
+```
 
-1. login
-2. registration (l'inscription)
-3. OTP Verification (par email)
-4. Mot de passe oublié
-5. rechercher un voyage (pour voir les voyages disponibles et sélectionner le voyage souhaité)
-6. réserver voyage (inclus le paiement)
-7. CRUD de voyages
-8. CRUD de réservation
-9. CRUD de clients
-10. Modifier le profile (clients ou admin)
-11. Dashboard de l'admin
+6. Configurez votre base de données dans le fichier .env :
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=AloVoyage
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Les tâches 
-**Mohammed :** 
-- login
-- registration
-- otp verification
-- mot de passe oublié
+7. Générez la clé d'application :
+```bash
+php artisan key:generate
+```
+
+8. Créez la base de données et exécutez les migrations :
+```bash
+php artisan migrate
+```
+
+9. Remplissez la base de données avec les données de test :
+```bash
+php artisan db:seed
+```
+
+10. Démarrez le serveur de développement :
+```bash
+php artisan serve
+```
+
+11. Accédez à l'application dans votre navigateur :
+```
+http://127.0.0.1:8000
+```
+
+## Compte de test
+Pour tester l'application, vous pouvez utiliser les identifiants suivants :
+```
+Email : jhon@gmail.com
+Mot de passe : jhon123
+```
+
+## Technologies utilisées
+- Frontend : HTML5, CSS3, JavaScript, Tailwind CSS
+- Backend : PHP (Laravel 10)
+- Base de données : MySQL
+- Outils : Composer, NPM, Git
+
+## Notes importantes
+- Assurez-vous que votre serveur MySQL est en cours d'exécution
+- Vérifiez que tous les prérequis sont installés avant de commencer l'installation
+- En cas de problème avec les migrations, essayez de rafraîchir la base de données :
+```bash
+php artisan migrate:fresh --seed
+```
+
+## Contribution
+Si vous souhaitez contribuer au projet, vous pouvez :
+1. Fork le projet
+2. Créer une branche pour votre fonctionnalité (`git checkout -b feature/AmazingFeature`)
+3. Commiter vos changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+## Licence
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+
+## Contact
+Erraguibi Abdelilah - [@LinkedIn](https://www.linkedin.com/in/erraguibi/)
+Belefqih Mohammed - [@LinkedIn](https://www.linkedin.com/in/mohammedbelefqih/) 
