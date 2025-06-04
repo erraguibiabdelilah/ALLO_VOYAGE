@@ -394,14 +394,23 @@
             display: inline-block;
             font-size: 14px;
         }
+
         .action-button {
-            background-color: #FF6B35;
+            background-color: #ff6600;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             padding: 12px;
             width: 100%;
             font-weight: bold;
+            box-shadow: 0 5px 10px rgba(255, 102, 0, 0.3) ;
+            transition: all 0.3s ease ;
+        }
+
+        .action-button:hover {
+            background-color: #e65c00;
+            box-shadow: 0 6px 20px rgba(255, 102, 0, 0.4);
+            transform: translateY(-2px) ;
         }
 
         .blur-active {

@@ -105,7 +105,7 @@
                             <div class="col-lg-2 col-md-2 text-start ml-2 mx-2">
                                 <div class="time">{{$voyage->heure_depart}}</div>
                                 <div class="city">{{$voyage->lieu_depart}}</div>
-                                <div class="station">Gare Routiere Agadir</div>
+                                <div class="station">Gare Routiere {{$voyage->lieu_depart}}</div>
                             </div>
 
                             <!-- Duration -->
@@ -121,7 +121,7 @@
                             <div class="col-lg-2 col-md-2 text-end mx-2">
                                 <div class="time">{{$voyage->heure_arrivee}}</div>
                                 <div class="city">{{$voyage->destination}}</div>
-                                <div class="station">Gare Routiere de Marrakech</div>
+                                <div class="station">Gare Routiere de {{$voyage->destination}}</div>
                             </div>
                             <div class="col-lg-3 col-md-3 text-center" style="margin-left: 8rem">
                                 <div class="price">{{$voyage->prix}} DH</div>

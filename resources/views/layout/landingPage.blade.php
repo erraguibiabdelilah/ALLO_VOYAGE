@@ -516,83 +516,159 @@
 </section>
 
 
+</section>
+
+<!-- Section Avis Clients -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Ce que disent nos voyageurs</h2>
+        
+        <div class="row g-4">
+            <!-- Avis 1 -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="images/avatar1.jpg" class="rounded-circle" width="60" height="60" alt="Avatar" 
+                                 onerror="this.src='https://ui-avatars.com/api/?name=Sarah+M&background=ff6600&color=fff'">
+                            <div class="ms-3">
+                                <h5 class="mb-0">Sarah M.</h5>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">"Service exceptionnel ! Le bus était très confortable et le personnel très attentionné. Je recommande vivement AlloVoyage pour tous vos déplacements."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avis 2 -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="images/avatar2.jpg" class="rounded-circle" width="60" height="60" alt="Avatar"
+                                 onerror="this.src='https://ui-avatars.com/api/?name=Karim+H&background=ff6600&color=fff'">
+                            <div class="ms-3">
+                                <h5 class="mb-0">Karim H.</h5>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">"Réservation facile et rapide. Les horaires sont respectés et le WiFi à bord est un vrai plus. Je voyage régulièrement avec eux."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avis 3 -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="images/avatar3.jpg" class="rounded-circle" width="60" height="60" alt="Avatar"
+                                 onerror="this.src='https://ui-avatars.com/api/?name=Leila+B&background=ff6600&color=fff'">
+                            <div class="ms-3">
+                                <h5 class="mb-0">Leila B.</h5>
+                                <div class="text-warning">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-muted mb-0">"Prix très compétitifs et service client réactif. Les sièges sont confortables et l'expérience de voyage est toujours agréable."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Éléments
+        const notificationBell = document.getElementById('notificationBell');
+        const messageBell = document.getElementById('messageBell');
+        const profileSection = document.getElementById('profileSection');
+        const notificationModal = document.getElementById('notificationModal');
+        const messageModal = document.getElementById('messageModal');
+        const profileModal = document.getElementById('profileModal');
+        const closeNotificationModal = document.getElementById('closeNotificationModal');
+        const closeMessageModal = document.getElementById('closeMessageModal');
 
+        // Fonction pour fermer tous les modals
+        function closeAllModals() {
+            notificationModal.style.display = 'none';
+            messageModal.style.display = 'none';
+            profileModal.style.display = 'none';
+        }
 
+        // Fonctions pour gérer l'ouverture et la fermeture des modals
+        function toggleNotificationModal() {
+            closeAllModals();
+            notificationModal.style.display = 'block';
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Éléments
-            const notificationBell = document.getElementById('notificationBell');
-            const messageBell = document.getElementById('messageBell');
-            const profileSection = document.getElementById('profileSection');
-            const notificationModal = document.getElementById('notificationModal');
-            const messageModal = document.getElementById('messageModal');
-            const profileModal = document.getElementById('profileModal');
-            const closeNotificationModal = document.getElementById('closeNotificationModal');
-            const closeMessageModal = document.getElementById('closeMessageModal');
+        function toggleMessageModal() {
+            closeAllModals();
+            messageModal.style.display = 'block';
+        }
 
-            // Fonction pour fermer tous les modals
-            function closeAllModals() {
-                notificationModal.style.display = 'none';
-                messageModal.style.display = 'none';
-                profileModal.style.display = 'none';
-            }
+        function toggleProfileModal() {
+            closeAllModals();
+            profileModal.style.display = 'block';
+        }
 
-            // Fonctions pour gérer l'ouverture et la fermeture des modals
-            function toggleNotificationModal() {
-                closeAllModals();
-                notificationModal.style.display = 'block';
-            }
-
-            function toggleMessageModal() {
-                closeAllModals();
-                messageModal.style.display = 'block';
-            }
-
-            function toggleProfileModal() {
-                closeAllModals();
-                profileModal.style.display = 'block';
-            }
-
-            // Événements
-            notificationBell.addEventListener('click', function(event) {
-                event.stopPropagation();
-                toggleNotificationModal();
-            });
-
-            messageBell.addEventListener('click', function(event) {
-                event.stopPropagation();
-                toggleMessageModal();
-            });
-
-            profileSection.addEventListener('click', function(event) {
-                event.stopPropagation();
-                toggleProfileModal();
-            });
-
-            closeNotificationModal.addEventListener('click', function() {
-                notificationModal.style.display = 'none';
-            });
-
-            closeMessageModal.addEventListener('click', function() {
-                messageModal.style.display = 'none';
-            });
-
-            // Ferme les modals si on clique en dehors
-            document.addEventListener('click', function(event) {
-                if (!notificationBell.contains(event.target) &&
-                    !messageBell.contains(event.target) &&
-                    !profileSection.contains(event.target) &&
-                    !notificationModal.contains(event.target) &&
-                    !messageModal.contains(event.target) &&
-                    !profileModal.contains(event.target)) {
-                    closeAllModals();
-                }
-            });
+        // Événements
+        notificationBell.addEventListener('click', function(event) {
+            event.stopPropagation();
+            toggleNotificationModal();
         });
-    </script>
+
+        messageBell.addEventListener('click', function(event) {
+            event.stopPropagation();
+            toggleMessageModal();
+        });
+
+        profileSection.addEventListener('click', function(event) {
+            event.stopPropagation();
+            toggleProfileModal();
+        });
+
+        closeNotificationModal.addEventListener('click', function() {
+            notificationModal.style.display = 'none';
+        });
+
+        closeMessageModal.addEventListener('click', function() {
+            messageModal.style.display = 'none';
+        });
+
+        // Ferme les modals si on clique en dehors
+        document.addEventListener('click', function(event) {
+            if (!notificationBell.contains(event.target) &&
+                !messageBell.contains(event.target) &&
+                !profileSection.contains(event.target) &&
+                !notificationModal.contains(event.target) &&
+                !messageModal.contains(event.target) &&
+                !profileModal.contains(event.target)) {
+                closeAllModals();
+            }
+        });
+    });
+</script>
 </body>
 </html>

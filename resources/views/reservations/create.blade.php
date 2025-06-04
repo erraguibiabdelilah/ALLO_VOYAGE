@@ -3,6 +3,30 @@
 <body>
 
     <style>
+        .confirm-btn {
+            background-color: #ff6600;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            padding: 10px 20px;
+            box-shadow: 0 5px 10px rgba(255, 102, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn:disabled {
+            background-color: #cccccc !important;
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .confirm-btn:not(:disabled):hover {
+            background-color: #e65c00;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(255, 102, 0, 0.4);
+        }
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
@@ -311,7 +335,10 @@
             </label>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-3 w-100" id="btnSubmit" disabled>
+        <button 
+            type="submit" 
+            class="confirm-btn mt-3 w-100" 
+            id="btnSubmit" disabled>
             Confirmer la réservation
         </button>
     </div>

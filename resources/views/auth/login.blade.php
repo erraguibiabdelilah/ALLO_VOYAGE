@@ -24,9 +24,9 @@
             @csrf
             <h1>Créer un compte</h1>
             <span>ou utilisez votre email pour vous inscrire</span>
-            <input type="text" placeholder="Nom" name="name" />
-            <input type="email" placeholder="Email" name="email" />
-            <input type="password" placeholder="Mot de passe" name="password" />
+            <input type="text" placeholder="Nom" name="name" required/>
+            <input type="email" placeholder="Email" name="email" required/>
+            <input type="password" placeholder="Mot de passe" name="password" required/>
             <input type="password" name="password_confirmation" placeholder="Confirmer mot de passe" required>
             <button type="submit">S'inscrire</button>
         </form>
